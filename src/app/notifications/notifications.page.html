@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar style="color: white;" color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+     Notifications
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" class="no-ripple" >
+    <ion-fab-button (click)="gotohome()">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+
+
+  <div *ngIf="!showcont">
+
+    <ion-grid>
+
+
+      <ion-col class="ion-align-self-center">
+        <div padding></div>
+        <div padding></div>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-label style="color: green;font-size: 30px;font-family: lato;">Loading your <br> Notification/s</ion-label><br>
+          <ion-label style="color: green;font-size: 30px;font-family: lato;"> Please Wait...</ion-label>
+
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center">
+
+          <img src="../../assets/loadin_gif.gif" alt=""><br>
+        </ion-row>
+
+      </ion-col>
+    </ion-grid>
+
+  </div>
+
+
+<div *ngIf="showcont">
+  
+<div *ngFor="let item of allnot"  >
+<ion-card  style="border: 1px solid black;
+  border-radius: 20px;">
+   <div style="margin-left:3% ;margin-right:3% ; margin-top:2% ;">
+    <ion-label style="font-family: lato;font-size: 20px;color: black;">
+     <b> {{item.title}}</b>
+    </ion-label><br>
+  
+    <ion-label style="font-family: lato;;font-size: 15px;color: black;">
+ <b>   {{item.body}}</b>
+  </ion-label><br>
+<div style="padding-top: 1%;"></div>
+  <ion-label style="font-family: lato;color: black;">
+    {{ item.date | date:'medium' }} 
+  </ion-label>
+</div>
+  </ion-card>
+</div>
+
+
+</div>
+
+ 
+</ion-content>

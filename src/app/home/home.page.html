@@ -1,0 +1,1133 @@
+
+<ion-header>
+  <ion-toolbar style="color: white;" color="success" >
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Home
+    </ion-title>
+   
+
+
+
+<div slot="end" style="padding-right: 1.5%;padding-top: 2%;" *ngIf="!regcrc"  >
+  <ion-icon size="large"  style="color: black;" (click)="gotonoti()"  src="../../assets/notifications-sharp.svg" name="notifications-sharp"></ion-icon>
+  <ion-badge  *ngIf="this.nnnumber!=0" style="color: orangered;" slot="end" id="cart-badge">{{this.nnnumber}}</ion-badge>
+</div>
+
+
+
+  
+   </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+
+  <ion-fab vertical="top" horizontal="end" slot="fixed" edge class="no-ripple" *ngIf="regcrc&&editme">
+    <ion-fab-button (click)="gotoregister()" >
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" class="no-ripple" *ngIf="regcrc&&editme">
+    <ion-fab-button (click)="this.regcrc=false">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+ 
+  <ion-grid  class="logp"  *ngIf="editme"   >
+  
+    
+    <ion-col *ngIf="!showcont" class="ion-align-self-center">
+      <div padding></div>
+      <div padding></div>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-label  style="color: green;font-size: 30px;font-family: lato;">Loading your Data </ion-label>
+        <ion-label  style="color: green;font-size: 30px;font-family: lato;"> Please Wait...</ion-label>
+        
+      </ion-row>
+ 
+      <ion-row class="ion-justify-content-center" >
+       
+        <img src="../../assets/loadin_gif.gif" alt=""><br>
+      </ion-row>
+     
+    </ion-col>
+
+
+    <ion-col *ngIf="showcont&&!regcrc">
+      <ion-row> 
+        
+       
+       
+       
+       <ion-card class="c" style="border: 2px solid royalblue;
+        border-radius: 20px;">
+<ion-grid>
+  <ion-col >
+
+    <ion-row class="ion-justify-content-center" *ngIf="catog=='CUSTOMER'">
+      <img class="indian" src="../../assets/indian_farmercropedreal.jpg" alt="Farmer">
+
+    </ion-row>
+    <ion-row class="ion-justify-content-center" *ngIf="catog=='SUPERVISOR'" >
+      <img class="indian" src="../../assets/supp.png" alt="Farmer">
+
+    </ion-row>
+  </ion-col>
+</ion-grid>
+
+          <div>
+            <ion-grid>
+              <ion-col>
+              <ion-row class="ion-justify-content-center" >
+            <ion-card-title style="font-size: 30px;">{{fullname}}</ion-card-title>
+
+          </ion-row>
+        <ion-row class="ion-justify-content-center">
+            <ion-card-subtitle color="dark">{{catog}}</ion-card-subtitle>
+
+          </ion-row>
+          <div style="padding-top: 5%;"> </div>
+          <ion-row class="ion-justify-content-center" >
+            
+            <ion-card-title style="font-size: 23px;">{{phone}}</ion-card-title>
+
+          </ion-row>
+        </ion-col>
+          </ion-grid>
+          
+          
+        </div>
+        </ion-card>
+      <ion-card class="c" style="border: 2px solid royalblue;
+      border-radius: 20px;">
+
+
+        <div>
+
+          
+
+          <!-- <ion-card-content> -->
+            <ion-row class="ion-justify-content-center">
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark" style="font-size: 50px;font-family: 'Lato', sans-serif;"  (click)="searchcrc()"> {{crcnum}}
+                  </ion-label>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark"> <b>Number of CRC's Connected</b>
+                  </ion-label>
+                </ion-row>
+              </ion-grid>
+            </ion-row>
+            
+          
+
+            <ion-row class="ion-justify-content-between" *ngIf="!showdetailsnum" >
+            
+
+
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                </ion-row>
+              </ion-grid>
+
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                </ion-row>
+              </ion-grid>
+
+
+            </ion-row>
+          
+
+            <ion-grid>
+              <ion-row  class="ion-justify-content-center" *ngIf="showdetailsnum">
+               <ion-label  style="font-size: 20px;color :green" > Total Orders Variety's DFLS </ion-label>
+              </ion-row>
+            </ion-grid>
+            <ion-row class="ion-justify-content-between" *ngIf="showdetailsnum">
+           
+
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark" style="font-size: 22px;font-family: 'Lato', sans-serif; font-size: 35px;"> {{crossbreed}}
+                  </ion-label>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark"> <b>Cross Breed(CB)</b>
+                  </ion-label>
+                </ion-row>
+              </ion-grid>
+
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark" style="font-size: 22px;font-family: 'Lato', sans-serif;font-size: 35px">{{bivoltine}}
+                  </ion-label>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark"> <b>Bivoltine(BV)</b>
+                  </ion-label>
+                </ion-row>
+              </ion-grid>
+
+
+
+            </ion-row>
+
+
+
+
+
+
+
+            <ion-row class="ion-justify-content-between" *ngIf="!showdetailsnum">
+
+
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                </ion-row>
+              </ion-grid>
+
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                </ion-row>
+              </ion-grid>
+
+
+            </ion-row>
+            <div style="padding-top: 5%;"></div>
+
+            <ion-row class="ion-justify-content-between" *ngIf="showdetailsnum">
+
+
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark" style="font-size: 22px;font-family: 'Lato', sans-serif;font-size: 35px"> {{bvp1seed}}
+                  </ion-label>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark"> <b>BV P1 Seed</b>
+                  </ion-label>
+                </ion-row>
+              </ion-grid>
+
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark" style="font-size: 22px;font-family: 'Lato', sans-serif;font-size: 35px">{{puremysore}}
+                  </ion-label>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark"> <b>Pure Mysore(PM)</b>
+                  </ion-label>
+                </ion-row>
+              </ion-grid>
+
+
+
+            </ion-row>
+       
+          <!-- </ion-card-content> --> </div>
+        </ion-card>
+      </ion-row>
+
+
+
+
+<!-- 
+
+
+    <ion-row>
+      {{device_token}}
+
+      <ion-button color="success" (click)="update()" >Update</ion-button>
+      <ion-label *ngIf="sure" >Done</ion-label>
+
+    </ion-row> -->
+
+    </ion-col>
+  
+  </ion-grid>
+
+
+
+  
+<ion-grid *ngIf="regcrc&&editme"  >
+  <ion-col *ngIf="!loadregcrc" class="ion-align-self-center">
+    <div padding></div>
+    <div padding></div>
+
+    <ion-row class="ion-justify-content-center">
+      <ion-label  style="color: green;font-size: 30px;font-family: lato;">Loading your Data </ion-label>
+      <ion-label  style="color: green;font-size: 30px;font-family: lato;"> Please Wait...</ion-label>
+      
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center" >
+     
+      <img src="../../assets/loadin_gif.gif" alt=""><br>
+    </ion-row>
+   
+  </ion-col>
+
+
+
+
+  <ion-col *ngIf="loadregcrc" >
+
+
+
+
+
+
+
+<ion-row>
+
+  <ion-label style="color: black;font-family: lato;font-size: 35px;">Registered CRCs</ion-label>
+
+
+  <div *ngFor="let item of mbatches;let in = index">
+
+
+
+
+    <!-- <div style="margin-top: 2%;margin-left: 7%;">
+      <ion-label style="color: black;font-family: lato;font-size: 35px;">
+        <b>{{itemm[0].astate}}</b>
+      </ion-label>
+    </div> -->
+
+<!-- 
+    <div *ngFor="let item of itemm"> -->
+
+      
+      <div class="me">
+
+  <ion-slides>
+
+<ion-slide>
+
+      <div style="margin-right:6% ;padding-top: 1%;">
+
+
+        
+      
+          <ion-card class="c" style="border: 2px solid orangered;
+        border-radius: 25px;">
+            <div style="margin-left:3% ;margin-right:3% ; margin-top:2% ;">
+              
+
+              <ion-grid>
+
+                    
+                <ion-row class="ion-justify-content-between">
+                  <div>
+                    <ion-label>CRC Name -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.acname}}</b>
+                    </ion-label>
+
+                  </div>
+
+                  <div>
+                    <ion-label>
+                      CRC Phone -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.acphone}}</b>
+                    </ion-label>
+                  </div>
+
+                  <div>
+                    <!-- <ion-label>
+                      CRC Phone -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.acphone}}</b>
+                    </ion-label> -->
+
+                    <ion-icon class="scol" src="../../assets/star-sharp.svg"></ion-icon>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{(item.zcbrating+item.zbvrating+item.zp1rating+item.zpurating)/4|number : '1.1-1'}}({{item.zrcountcb+item.zrcountbv+item.zrcountp1+item.zrcountpu}})</b>
+                    </ion-label>
+
+                  </div>
+
+
+                </ion-row>
+                <div style="padding: 2%;"></div>
+
+                <ion-row class="ion-justify-content-between">
+                  <div>
+                    <ion-label>
+                      District -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.adistrict}} </b>
+                    </ion-label>
+
+                  </div>
+
+                  <div>
+                    <ion-label>
+                      Taluk -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.atown}} </b>
+                    </ion-label>
+
+                  </div>
+                </ion-row>
+
+
+                <ion-row class="ion-justify-content-between">
+                  <div>
+                    <ion-label>
+                      State -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.astate}} </b>
+                    </ion-label>
+
+                  </div>
+
+                  <div>
+                    <ion-label>
+                      Phone# -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.aphone}} </b>
+                    </ion-label>
+
+                  </div>
+                </ion-row>
+
+
+                <div style="padding: 2%;"></div>
+
+                <ion-row class="ion-justify-content-center">
+                  <ion-label style="color: black;font-size: 150x;font-family: lato;">Varieties</ion-label>
+                </ion-row>
+
+
+
+
+                <ion-row class="ion-justify-content-between">
+                  <div>
+                    <ion-label>
+
+                      Cross Breed(CB)-
+
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.ztcbtot}}</b>
+                    </ion-label>
+                    <br>
+                    <ion-icon class="scol" src="../../assets/star-sharp.svg"></ion-icon>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.zcbrating}}({{item.zrcountcb}})</b>
+                    </ion-label>
+
+                  </div>
+
+
+                  <div>
+                    <ion-label>
+
+                      BV P1 Seed -
+
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.ztp1tot}}</b>
+                    </ion-label>
+
+                    <br>
+
+                    <ion-icon class="scol" src="../../assets/star-sharp.svg"></ion-icon>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.zp1rating}}({{item.zrcountp1}})</b>
+                    </ion-label>
+
+                  </div>
+
+
+
+
+
+                </ion-row>
+
+
+                <ion-row class="ion-justify-content-between">
+
+                  <div>
+                    <ion-label>
+                      Bivoltine(BV) -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.ztbvtot}} </b>
+                    </ion-label>
+                    <br>
+
+                    <ion-icon class="scol" src="../../assets/star-sharp.svg"></ion-icon>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.zbvrating}}({{item.zrcountbv}})</b>
+                    </ion-label>
+
+
+                  </div>
+                  <div>
+                    <ion-label>
+                      Pure Mysore -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.ztputot}} </b>
+                    </ion-label>
+                    <br>
+                    <ion-icon class="scol" src="../../assets/star-sharp.svg"></ion-icon>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{item.zpurating}}({{item.zrcountpu}})</b>
+                    </ion-label>
+
+
+                  </div>
+                </ion-row>
+
+
+                
+
+                <div style="padding: 2%;"></div>
+
+             
+              </ion-grid>
+
+
+           
+
+            </div>
+          </ion-card>
+      </div>
+
+    </ion-slide>
+  <ion-slide  *ngIf="item.cat=='CUSTOMER'">
+
+    <div style="margin-right:6% ;padding-top: 1%;">
+
+
+        
+      
+      <ion-card class="c" style="border: 2px solid orangered;
+    border-radius: 25px;">
+        <div style="margin-left:3% ;margin-right:3% ; margin-top:2% ;">
+
+
+          <ion-grid>
+            <ion-row  class="ion-justify-content-center">
+             
+              <ion-label style="color: black;font-family: lato;size: 25px; ">
+                <b> {{item.acname}}</b>
+              </ion-label>
+            </ion-row>
+
+            <ion-row class="ion-justify-content-between">
+              <div>
+                <ion-label>Name -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.fullname}}</b>
+                </ion-label>
+
+              </div>
+
+              <div>
+                <ion-label>
+                  Phone -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.phone}}</b>
+                </ion-label>
+              </div>
+
+             
+
+
+            </ion-row>
+            <div style="padding: 1%;"></div>
+
+
+
+        
+            <ion-row class="ion-justify-content-between">
+              <div>
+                <ion-label>
+                 Address -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.address}} </b>
+                </ion-label>
+
+              </div>
+
+              <div>
+                <ion-label>
+                  District -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.district}} </b>
+                </ion-label>
+
+              </div>
+
+              <div>
+                <ion-label>
+                  Taluk -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.town}} </b>
+                </ion-label>
+
+              </div>
+
+            
+            </ion-row>
+
+
+            <div style="padding: 1%;"></div>
+
+
+
+
+
+
+
+
+            <ion-row class="ion-justify-content-between">
+              <!-- <div>
+                <ion-label>
+                  District -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.district}} </b>
+                </ion-label>
+
+              </div>
+
+              <div>
+                <ion-label>
+                  Taluk -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.town}} </b>
+                </ion-label>
+
+              </div> -->
+            </ion-row>
+            <div style="padding: 1%;"></div>
+
+
+            <ion-row class="ion-justify-content-between">
+              <div>
+                <ion-label>
+                  State -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.state}} </b>
+                </ion-label>
+
+              </div>
+
+              <div>
+                <ion-label>
+                  Pincode -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.pincode}} </b>
+                </ion-label>
+
+              </div>
+            </ion-row>
+
+
+            <div style="padding: 1%;"></div>
+
+
+            <ion-row class="ion-justify-content-between">
+              <div>
+                <ion-label>
+                  Culttype -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.culttype}} </b>
+                </ion-label>
+
+              </div>
+
+              <div>
+                <ion-label>
+                  Land(acres) -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.land}} </b>
+                </ion-label>
+
+              </div>
+            </ion-row>
+
+              <ion-row  class="ion-justify-content-center">
+                <ion-button color="dark" (click)="load(item)"    ><ion-icon style="color :white" src="../../assets/pencil-sharp.svg" name="pencil-sharp" size="small" ></ion-icon>&nbsp;&nbsp;<b>EDIT</b></ion-button>
+  
+                
+                
+  
+              </ion-row>
+            
+
+            
+          </ion-grid>
+
+
+        </div>
+      </ion-card>
+    </div>
+
+
+  </ion-slide>
+
+
+  <ion-slide  *ngIf="item.cat=='SUPERVISOR'">
+
+    <div style="margin-right:6% ;padding-top: 1%;">
+
+
+        
+      
+      <ion-card class="c" style="border: 2px solid orangered;
+    border-radius: 25px;">
+        <div style="margin-left:3% ;margin-right:3% ; margin-top:2% ;">
+                       
+
+
+          <ion-grid>
+            <ion-row  class="ion-justify-content-center">
+             
+              <ion-label style="color: black;font-family: lato;size: 20px;">
+                <b> {{item.acname}}</b>
+              </ion-label>
+            </ion-row>
+            <ion-row class="ion-justify-content-between">
+              <div>
+                <ion-label>Name -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.fullname}}</b>
+                </ion-label>
+
+              </div>
+
+              <div>
+                <ion-label>
+                  Phone -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.phone}}</b>
+                </ion-label>
+              </div>
+
+             
+
+
+            </ion-row>
+            <div style="padding: 2%;"></div>
+
+
+
+        
+            <ion-row class="ion-justify-content-between">
+              <div>
+                <ion-label>
+                 Address -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.address}} </b>
+                </ion-label>
+
+              </div>
+
+            
+            </ion-row>
+
+            <div style="padding: 1%;"></div>
+
+        
+            <ion-row class="ion-justify-content-between">
+              <div>
+                <ion-label>
+                  District -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.district}} </b>
+                </ion-label>
+
+              </div>
+
+              <div>
+                <ion-label>
+                  Taluk -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.town}} </b>
+                </ion-label>
+
+              </div>
+            </ion-row>
+
+            <div style="padding: 1%;"></div>
+
+            <ion-row class="ion-justify-content-between">
+              <div>
+                <ion-label>
+                  State -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.state}} </b>
+                </ion-label>
+
+              </div>
+
+              <div>
+                <ion-label>
+                  Pincode -
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+                  <b> {{item.pincode}} </b>
+                </ion-label>
+
+              </div>
+            </ion-row>
+
+
+            <ion-row  class="ion-justify-content-center">
+              <ion-button color="dark"  (click)="load(item);"  ><ion-icon style="color :white" src="../../assets/pencil-sharp.svg" name="pencil-sharp" size="small" ></ion-icon>&nbsp;&nbsp;<b>EDIT</b></ion-button>
+
+             </ion-row>
+
+
+            
+          </ion-grid>
+
+
+        </div>
+      </ion-card>
+    </div>
+
+
+  </ion-slide>
+
+  </ion-slides>
+</div>
+
+<!--   
+    </div> -->
+
+  </div>
+
+
+
+</ion-row>
+</ion-col>
+<div  style="padding-top: 10%;"></div>
+
+</ion-grid>
+
+
+
+<ion-grid *ngIf="this.selection=='CUSTOMER'&&!editme" class="logp">
+
+  <ion-col  class="ion-align-self-center">
+
+
+    <ion-row class="ion-justify-content-center">
+      <img class="silk" src="../../assets/icon.png" alt=""><br>
+
+    </ion-row>
+    <div padding></div>
+    <ion-row class="ion-justify-content-center">
+      <ion-label style="color: green;font-size: 40px;font-family: lato;">Edit</ion-label>
+      <ion-label style="color: black;font-size: 20px;font-family: lato;">Customer</ion-label>
+
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center" padding>
+
+
+      <form [formGroup]="cusregform">
+        <ion-item>
+          <ion-label position="floating">Enter Fullname</ion-label>
+          <ion-input type="text" formControlName="fullname" clearInput></ion-input>
+        </ion-item>
+
+
+
+
+
+        <ion-item>
+          <ion-label position="floating">Enter Phone Number</ion-label>
+          <ion-input type="tel" formControlName="phone" clearInput></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-label>Select State</ion-label>
+          <ion-select placeholder="States" formControlName="state">
+
+            <ion-select-option *ngFor="let smar of states; let msi = index" [value]="smar.value">{{smar.value}}
+            </ion-select-option>
+
+          </ion-select>
+        </ion-item>
+
+
+
+        <ion-item>
+
+          <ion-label>Select District</ion-label>
+          <ion-select placeholder="Districts" formControlName="district">
+
+            <ion-select-option *ngFor="let dmar of districts; let mdi = index" [value]="dmar.value">{{dmar.value}}
+            </ion-select-option>
+
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+
+          <ion-label>Select Taluk</ion-label>
+          <ion-select placeholder="Taluk" formControlName="town">
+
+            <ion-select-option *ngFor="let tmar of towns; let mti = index" [value]="tmar.value">{{tmar.value}}
+            </ion-select-option>
+
+          </ion-select>
+        </ion-item>
+
+
+
+
+
+
+        <ion-item>
+          <ion-label position="floating">Enter Address</ion-label>
+          <ion-input type="text" formControlName="address" clearInput></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Enter Village</ion-label>
+          <ion-input type="text" formControlName="village" clearInput></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Enter Pincode</ion-label>
+          <ion-input type="tel" formControlName="pincode" clearInput></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label position="floating">Enter Land Holding(in acres)</ion-label>
+          <ion-input type="tel" formControlName="land" clearInput></ion-input>
+        </ion-item>
+
+
+
+
+        <ion-item>
+
+          <ion-label>Cultivation Types</ion-label>
+          <ion-select placeholder="Select Cultivation Type" formControlName="culttype">
+       
+            <ion-select-option *ngFor="let item of cccat" [value]="item.value" >{{item.value}}</ion-select-option>
+                  </ion-select>
+        </ion-item>
+
+      </form>
+
+
+    </ion-row>
+   
+
+    <ion-row class="ion-justify-content-between" padding>
+
+      <ion-button color="dark"  (click)="this.editme=true; 
+      this.cusregform.reset()"
+      >Cancel</ion-button>
+
+      <ion-button color="success" (click)="this.edit(this.dupdate)"
+        [disabled]="this.cusregform.invalid" >Update</ion-button>
+      <!-- <ion-spinner name="crescent" color="success" *ngIf="!showlogbut"></ion-spinner> -->
+    </ion-row>
+
+   
+
+  </ion-col>
+</ion-grid>
+
+
+
+
+
+
+<ion-grid *ngIf="this.selection=='SUPERVISOR'&&!editme" class="logp">
+
+  <ion-col  class="ion-align-self-center">
+
+
+    <ion-row class="ion-justify-content-center">
+      <img class="silk" src="../../assets/icon.png" alt=""><br>
+
+    </ion-row>
+    <div padding></div>
+    <ion-row class="ion-justify-content-center">
+
+      <ion-label style="color: green;font-size: 40px;font-family: lato;">Edit</ion-label>
+      <ion-label style="color: black;font-size: 20px;font-family: lato;">Supervisor</ion-label>
+
+    </ion-row>
+
+    <ion-row class="ion-justify-content-center" padding>
+
+
+      <form [formGroup]="supregform">
+        <ion-item>
+          <ion-label position="floating">Edit Fullname</ion-label>
+          <ion-input type="text" formControlName="fullname" clearInput></ion-input>
+        </ion-item>
+
+
+
+
+        <ion-item>
+          <ion-label position="floating">Edit Phone Number</ion-label>
+          <ion-input type="tel" formControlName="phone" clearInput></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+
+          <ion-label>Select State</ion-label>
+          <ion-select placeholder="States" formControlName="state">
+
+            <ion-select-option *ngFor="let smar of states; let msi = index" [value]="smar.value">{{smar.value}}
+            </ion-select-option>
+
+          </ion-select>
+        </ion-item>
+
+
+
+        <ion-item>
+
+          <ion-label>Select District</ion-label>
+          <ion-select placeholder="Districts" formControlName="district">
+
+            <ion-select-option *ngFor="let dmar of districts; let mdi = index" [value]="dmar.value">{{dmar.value}}
+            </ion-select-option>
+
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+
+          <ion-label>Select Taluk</ion-label>
+          <ion-select placeholder="Taluks" formControlName="town">
+
+            <ion-select-option *ngFor="let tmar of towns; let mti = index" [value]="tmar.value">{{tmar.value}}
+            </ion-select-option>
+
+          </ion-select>
+        </ion-item>
+
+
+
+
+
+
+        <ion-item>
+          <ion-label position="floating">Edit Address</ion-label>
+          <ion-input type="text" formControlName="address" clearInput></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Enter Village</ion-label>
+          <ion-input type="text" formControlName="village" clearInput></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Enter Pincode</ion-label>
+          <ion-input type="tel" formControlName="pincode" clearInput></ion-input>
+        </ion-item>
+
+
+      </form>
+
+
+    </ion-row>
+    
+
+
+
+   
+
+    <ion-row class="ion-justify-content-between" padding>
+      <ion-button color="success"  (click)=" this.editme=true; 
+      this.supregform.reset()"
+      >Cancel</ion-button>
+   
+
+      <ion-button color="success"  (click)="edit(this.dupdate)" 
+        [disabled]="this.supregform.invalid">Update</ion-button>
+      <!-- <ion-spinner name="crescent" color="success" *ngIf="!showlogbut"></ion-spinner> -->
+    </ion-row>
+
+   
+
+  </ion-col>
+</ion-grid>
+
+
+
+
+  
+</ion-content>
+
+

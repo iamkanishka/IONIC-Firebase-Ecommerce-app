@@ -1,0 +1,257 @@
+<ion-content>
+
+  <div *ngIf="!fivesec" class="logp">
+
+    <ion-grid class="logp">
+      <ion-col class="ion-align-self-center">
+        <ion-row class="ion-justify-content-center">
+          <ion-label style="color: green;font-size: 30px;font-family: lato;">Checking Credentials...</ion-label>
+
+
+        </ion-row>
+        <ion-row class="ion-justify-content-center">
+          <img src="../../assets/loadin_gif.gif" alt=""><br>
+        </ion-row>
+      </ion-col>
+    </ion-grid>
+
+  </div>
+
+
+  <div *ngIf="fivesec">
+
+
+
+    <ion-grid *ngIf="showslides">
+
+      <ion-col class="ion-align-self-center">
+        <ion-slides autoplay="3000" pager>
+          <ion-slide>
+
+            <ion-grid>
+              <ion-col class="ion-align-self-center">
+                <ion-row class="ion-justify-content-center">
+                  <img class="silkw" src="../../assets/namaskara.png" alt=""><br>
+
+                </ion-row>
+                <div style="padding-top: 15%;"></div>
+                <ion-row class="ion-justify-content-center" padding>
+                  <ion-label style="color: green;font-size: 40px;font-family: lato;">
+                    WELCOME 
+                  </ion-label>
+                </ion-row>
+                <div style="padding-top: 10%;"></div>
+
+                <ion-row class="ion-justify-content-center">
+                  <img class="hand" src="../../assets/handshake.png" alt=""><br>
+
+                </ion-row>
+
+                <ion-row class="ion-justify-content-center">
+                  <img class="power" src="../../assets/powered.png" alt=""><br>
+
+                </ion-row>
+              </ion-col>
+            </ion-grid>
+          </ion-slide>
+
+          <ion-slide>
+
+            <ion-grid>
+              <ion-col class="ion-align-self-center">
+                <ion-row class="ion-justify-content-center">
+                  <img class="silkw" src="../../assets/icon.png" alt=""><br>
+
+                </ion-row>
+                <div padding></div>
+                <ion-row class="ion-justify-content-center" padding>
+                  <ion-label style="color: green;font-size: 40px;font-family: lato;">
+                    WELCOME <br> To <br> SeriMitra...
+                  </ion-label>
+                </ion-row>
+              </ion-col>
+            </ion-grid>
+          </ion-slide>
+          <ion-slide>
+            <div style="padding-left: 10%;">
+              <ion-grid>
+                <ion-col class="ion-align-self-center">
+                  <ion-row class="ion-justify-content-center">
+                    <img class="silk" src="../../assets/icon.png" alt=""><br>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center" style="padding-right: 10%;">
+
+                    <img src="../../assets/agrograph.gif" alt=""><br>
+
+                  </ion-row>
+                  <ion-row>
+                    <ion-label style="color: green;font-size: 30px;font-family: lato;">
+                      DIGITALISING SERICULTURE...
+                    </ion-label>
+
+                  </ion-row>
+                </ion-col>
+              </ion-grid>
+            </div>
+            <div padding></div>
+          </ion-slide>
+
+          <ion-slide>
+
+            <ion-grid>
+              <ion-col class="ion-align-self-center">
+                <ion-row>
+                  <img src="../../assets/agriman.jpg" alt=""><br>
+
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label style="color: green;font-size: 25px;font-family: lato;">
+                    We Take your Orders Through <br> E-Platforms...
+                  </ion-label>
+                </ion-row>
+              </ion-col>
+            </ion-grid>
+          </ion-slide>
+
+
+          <ion-slide>
+            <ion-grid>
+              <ion-col class="ion-align-self-center">
+                <ion-row>
+                  <img src="../../assets/shipping.png" alt=""><br>
+
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label style="color: green;font-size: 25px;font-family: lato;">
+                    We Ensure the Good Quality Of your Order
+                  </ion-label>
+                </ion-row>
+              </ion-col>
+            </ion-grid>
+          </ion-slide>
+
+
+
+
+
+          <ion-slide>
+            <ion-grid>
+              <ion-col class="ion-align-self-center">
+
+                <ion-row>
+                  <img src="../../assets/delivery.jpg" alt=""><br>
+
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label style="color: green;font-size: 25px;font-family: lato;">
+                    We Ensure your Order reach on the Right Time...
+                  </ion-label>
+                </ion-row>
+                <div style="padding-top: 10%;"></div>
+                <ion-row class="ion-justify-content-center">
+                  <ion-button color="success" (click)="this.showslides=false;">Start</ion-button>
+
+                </ion-row>
+                <div>
+
+                </div>
+
+              </ion-col>
+            </ion-grid>
+          </ion-slide>
+
+        </ion-slides>
+      </ion-col>
+
+
+
+    </ion-grid>
+
+
+
+
+    <ion-grid *ngIf="!showslides&&this.gettype" class="regbut">
+
+      <ion-col *ngIf="!this.justtryadhar" >
+        <ion-row class="ion-justify-content-end">
+          <ion-label style="color: green;font-size: 25px;font-family: lato;" (click)="gotoregister()" >Register</ion-label>
+        </ion-row>
+      </ion-col>
+    </ion-grid>
+
+    <ion-grid *ngIf="!showslides&&this.gettype" class="logp">
+
+      <ion-col *ngIf="!this.justtryadhar" class="ion-align-self-center">
+
+
+        <ion-row class="ion-justify-content-center">
+          <img class="silk" src="../../assets/icon.png" alt=""><br>
+
+        </ion-row>
+        <div padding></div>
+        <ion-row class="ion-justify-content-center">
+          <ion-label style="color: green;font-size: 40px;font-family: lato;">Login</ion-label>
+
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center" padding>
+
+
+          <form [formGroup]="logform">
+            <ion-item>
+              <ion-label position="floating">Enter ADHAAR Number</ion-label>
+
+              <ion-input type="tel" formControlName="adharno" clearInput></ion-input>
+            </ion-item>
+
+            <ion-item>
+              <ion-label position="floating">Enter Phone Number</ion-label>
+              <ion-input type="tel" formControlName="phone" clearInput></ion-input>
+            </ion-item>
+
+            <ion-item >
+
+              <ion-label>I am</ion-label>
+              <ion-select  placeholder="Category" formControlName="yytype">
+                <ion-select-option *ngFor="let item of cccat" [value]="item.value" >{{item.value}}</ion-select-option>
+
+
+          
+              </ion-select>
+            </ion-item>
+
+            <ion-item>
+              <ion-label>Get Notification</ion-label>
+              <ion-checkbox formControlName="push"></ion-checkbox>
+            </ion-item>
+          </form>
+
+
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center" padding>
+
+          <ion-button color="success" (click)="makelogin()" *ngIf="showlogbut" size="large"
+            [disabled]="this.logform.invalid">LOGIN</ion-button>
+          <ion-spinner name="crescent" color="success" *ngIf="!showlogbut"></ion-spinner>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center" padding *ngIf="this.showggg">
+
+          <ion-label style="color: green;"><u>Logging as {{realshow}}</u></ion-label>
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center" padding *ngIf="this.showback">
+
+          <ion-label style="color: green;" (click)="this.showslides=true;this.gettype=true;this.logform.reset()">
+            <u>Back</u></ion-label>
+          <!-- {{this.device_token}} -->
+        </ion-row>
+
+      </ion-col>
+    </ion-grid>
+
+
+  </div>
+</ion-content>

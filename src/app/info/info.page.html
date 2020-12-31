@@ -1,0 +1,393 @@
+<ion-header>
+  <ion-toolbar style="color: white;" color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+ Information
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" class="no-ripple" *ngIf="!showindex">
+    <ion-fab-button (click)="  this.showindex=true;this.pest=false;this.diseases=false;this.showstage=false;this.soil=false;
+    this.cultivation=false;">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+<div *ngIf="showindex">
+  <ion-card style="border: 1.5px solid green;">
+    <ion-card-header>
+      <ion-grid >
+
+        <ion-col >
+ <ion-row class="ion-justify-content-center">
+  <img style="  width: 50%; height: 50%;" src="../../assets/infos/mulberry.png" alt="">
+ </ion-row>
+  <ion-row class="ion-justify-content-center">
+  
+  <ion-card-title>Mulberry</ion-card-title>
+
+</ion-row>
+<ion-item-divider></ion-item-divider>
+<div style="padding-top: 10%;"></div>
+
+<ion-row class="ion-justify-content-between">
+  <div>
+  <img class="mkm" src="../../assets/infos/soiltest.png" alt="" (click)="this.soil=true;this.showindex=false" ><br>
+<div style="padding-top: 3%;"></div>
+  <ion-label style="color: black;font-size: 20px;"><b>Soil Test</b></ion-label>
+</div>
+<div>  
+<img class="mkm" src="../../assets/infos/cultivation.png" alt="" (click)="this.cultivation=true;this.showindex=false"><br>
+<div style="padding-top: 3%;"></div>
+
+<ion-label style="color: black;font-size: 20px;"><b>Cultivation</b></ion-label>
+
+</div>
+</ion-row>
+<div style="padding-top: 5%;"></div>
+
+<ion-row class="ion-justify-content-between">
+<div>
+  <img class="mkm" src="../../assets/infos/pest.png" alt="" (click)="this.pest=true;this.showindex=false"><br>
+  <div style="padding-top: 3%;"></div>
+
+  <ion-label style="color: black;font-size: 20px;"><b>Pest</b></ion-label>
+
+</div>
+<div> 
+<img class="mkm" src="../../assets/infos/diseases.png" alt="" (click)="this.diseases=true;this.showindex=false"><br>
+<div style="padding-top: 3%;"></div>
+
+<ion-label style="color: black;font-size: 20px;"><b>Diseases</b></ion-label>
+
+</div>
+</ion-row>
+        </ion-col>
+      </ion-grid>
+    </ion-card-header>
+  
+    <ion-card-content>
+      
+    </ion-card-content>
+  </ion-card>
+
+
+
+  <ion-card style="border: 1.5px solid green;">
+    <ion-card-header>
+      <ion-grid >
+
+        <ion-col >
+ <ion-row class="ion-justify-content-center">
+  <img style="  width: 40%; height: 40%;" src="../../assets/infos/rearing.png" alt="">
+ </ion-row>
+  <ion-row class="ion-justify-content-center">
+  
+  <ion-card-title>Rearing</ion-card-title>
+
+</ion-row>
+<ion-item-divider></ion-item-divider>
+<div style="padding-top: 10%;"></div>
+
+<ion-row class="ion-justify-content-between">
+  <div>
+  <img class="nkn" src="../../assets/infos/silwormstages.png" alt="" (click)="this.showstage=true;this.showindex=false"><br>
+<div style="padding-top: 3%;"></div>
+  <ion-label style="color: black;font-size: 20px;"><b>SilkWorm<br>Stages</b></ion-label>
+</div>
+<div>  
+<img class="nkn" src="../../assets/infos/cleandisin.png" alt=""><br>
+<div style="padding-top: 3%;"></div>
+
+<ion-label style="color: black;font-size: 20px;"><b>Cleaning,<br>Disinfectants</b></ion-label>
+
+</div>
+</ion-row>
+
+        </ion-col>
+      </ion-grid>
+    </ion-card-header>
+  
+  </ion-card>
+
+
+</div>
+
+<div *ngIf="!showindex">
+<div *ngIf="pest" >
+  <ion-grid >
+    <ion-col >
+      <ion-row class="ion-justify-content-center">
+        <img style="  width: 30%; height: 30%;" src="../../assets/infos/pest.png" alt="">
+       </ion-row>
+     <ion-row  class="ion-justify-content-center" >
+    <ion-label style="color: black;font-size: 30px;"><b>Pest</b></ion-label>
+     
+    </ion-row>
+    </ion-col>
+  </ion-grid> 
+
+  <div *ngFor="let pitem of details" >
+
+  <ion-card style="border: 1.5px solid orangered;">
+    <ion-card-header>
+      <ion-grid >
+<ion-col >
+ <ion-row  class="ion-justify-content-center" >
+ 
+    <img  [src]="pitem.image" alt="">
+  
+ </ion-row>
+ <div style="padding-top: 3%;"></div>
+
+ <ion-row class="ion-justify-content-center">
+  <ion-label style="color: black;font-size: 20px;"><b>{{pitem.title}}</b></ion-label>
+
+</ion-row>
+
+ <ion-row>
+  <ul>
+   <li *ngIf="pitem.deta.l1!=null" style="color: black;font-family: lato;" ><b>{{pitem.deta.l1}}</b></li>
+   <li *ngIf="pitem.deta.l2!=null" style="color: black;font-family: lato;" ><b>{{pitem.deta.l2}}</b></li>
+    <li *ngIf="pitem.deta.l3!=null" style="color: black;font-family: lato;"><b>{{pitem.deta.l3}}</b></li>
+      <li *ngIf="pitem.deta.l4!=null" style="color: black;font-family: lato;"><b>{{pitem.deta.l4}}</b></li>
+    
+  </ul>
+ </ion-row>
+<ion-row  class="ion-justify-content-center">
+  <ion-label style="color: black;font-size: 20px;"><b>{{pitem.nature.title}}
+  </b></ion-label>
+
+</ion-row>
+ 
+<ion-row >
+<ul>
+  <li *ngIf="pitem.nature.l1!=null"style="color: black;font-family: lato;" ><b>{{pitem.nature.l1}}</b></li>
+  <li *ngIf="pitem.nature.l2!=null" style="color: black;font-family: lato;"><b>{{pitem.nature.l2}}</b></li>
+   <li *ngIf="pitem.nature.l3!=null" style="color: black;font-family: lato;"><b>{{pitem.nature.l3}}</b></li>
+     <li *ngIf="pitem.nature.l4!=null" style="color: black;font-family: lato;"><b>{{pitem.nature.l4}}</b></li>
+</ul>
+</ion-row>
+
+
+<ion-row  class="ion-justify-content-center" *ngIf=" pitem.mechanical!=null" >
+  <ion-label style="color: black;font-size: 20px;"><b>{{pitem.mechanical.title}}
+  </b></ion-label>
+
+</ion-row>
+ 
+<ion-row *ngIf=" pitem.mechanical!=null">
+<ul>
+  <li *ngIf="pitem.mechanical.l1!=null"style="color: black;font-family: lato;" ><b>{{pitem.mechanical.l1}}</b></li>
+  <li *ngIf="pitem.mechanical.l2!=null" style="color: black;font-family: lato;"><b>{{pitem.mechanical.l2}}</b></li>
+   <li *ngIf="pitem.mechanical.l3!=null" style="color: black;font-family: lato;"><b>{{pitem.mechanical.l3}}</b></li>
+     <li *ngIf="pitem.mechanical.l4!=null" style="color: black;font-family: lato;"><b>{{pitem.mechanical.l4}}</b></li>
+  
+</ul>
+</ion-row>
+
+
+        </ion-col>
+      </ion-grid>
+    </ion-card-header>
+  </ion-card>
+  </div>
+
+</div>
+
+<div *ngIf="diseases" >
+  <ion-grid >
+    <ion-col >
+      <ion-row class="ion-justify-content-center">
+        <img style="  width: 30%; height: 30%;" src="../../assets/infos/diseases.png" alt="">
+       </ion-row>
+     <ion-row  class="ion-justify-content-center" >
+    <ion-label style="color: black;font-size: 30px;"><b>Diseases</b></ion-label>
+     
+    </ion-row>
+    </ion-col>
+  </ion-grid>  
+
+  <div *ngFor="let ditem of detailstwo" >
+
+    <ion-card style="border: 1.5px solid orangered;">
+      <ion-card-header>
+        <ion-grid >
+  <ion-col >
+   <ion-row  class="ion-justify-content-center" >
+   
+      <img  [src]="ditem.image" alt="">
+    
+   </ion-row>
+   <div style="padding-top: 3%;"></div>
+  
+   <ion-row class="ion-justify-content-center">
+    <ion-label style="color: black;font-size: 20px;"><b>{{ditem.title}}</b></ion-label>
+  
+  </ion-row>
+  
+   <ion-row>
+    <ul>
+     <li *ngIf="ditem.l1!=null" style="color: black;font-family: lato;" ><b>{{ditem.l1}}</b></li>
+     <!-- <li *ngIf="pitem.deta.l2!=null" style="color: black;font-family: lato;" ><b>{{pitem.deta.l2}}</b></li>
+      <li *ngIf="pitem.deta.l3!=null" style="color: black;font-family: lato;"><b>{{pitem.deta.l3}}</b></li>
+        <li *ngIf="pitem.deta.l4!=null" style="color: black;font-family: lato;"><b>{{pitem.deta.l4}}</b></li> -->
+      
+    </ul>
+   </ion-row>
+  <ion-row  class="ion-justify-content-center">
+    <ion-label style="color: black;font-size: 20px;"><b>{{ditem.season.title}}
+    </b></ion-label>
+  
+  </ion-row>
+   
+  <ion-row >
+  <ul>
+    <li *ngIf="ditem.season.l1!=null" style="color: black;font-family: lato;" ><b>{{ditem.season.l1}}</b></li>
+    <!-- <li *ngIf="pitem.nature.l2!=null"> {{pitem.nature.l2}}</li>
+     <li *ngIf="pitem.nature.l3!=null">{{pitem.nature.l3}}</li>
+       <li *ngIf="pitem.nature.l4!=null">{{pitem.nature.l4}}</li> -->
+  </ul>
+  </ion-row>
+  
+  
+  <ion-row  class="ion-justify-content-center" *ngIf=" ditem.symptoms!=null" >
+    <ion-label style="color: black;font-size: 20px;"><b>{{ditem.symptoms.title}}
+    </b></ion-label>
+  
+  </ion-row>
+   
+  <ion-row *ngIf=" ditem.symptoms!=null">
+  <ul>
+    <li *ngIf="ditem.symptoms.l1!=null" style="color: black;font-family: lato;" ><b>{{ditem.symptoms.l1}}</b></li>
+    <li *ngIf="ditem.symptoms.l2!=null" style="color: black;font-family: lato;"><b>{{ditem.symptoms.l2}}</b></li>
+     <li *ngIf="ditem.symptoms.l3!=null" style="color: black;font-family: lato;"><b>{{ditem.symptoms.l3}}</b></li>
+       <li *ngIf="ditem.symptoms.l4!=null" style="color: black;font-family: lato;"><b>{{ditem.symptoms.l4}}</b></li>
+    
+  </ul>
+  </ion-row>
+  
+  
+          </ion-col>
+        </ion-grid>
+      </ion-card-header>
+    </ion-card>
+    </div>
+  
+
+
+</div>
+
+<div *ngIf="cultivation" >
+
+  <ion-card style="border: 1.5px solid orangered;">
+   
+    <ion-grid >
+<ion-col >
+<ion-row  class="ion-justify-content-center" >
+
+  <img  src="../../assets/infos/cultivation.png" alt="">
+
+</ion-row>
+<ion-row class="ion-justify-content-center">
+<ion-card-title>Cultivation</ion-card-title>
+</ion-row>
+<ion-row  class="ion-justify-content-center" >
+<ul>
+  <li style="font-size: 20px;font-family: lato;color: black;"><b>FERTILIZER ESTIMATION</b>
+  </li>
+  <div style="padding-top: 5%;"></div>
+  <li  style="font-size: 20px;font-family: lato;color: black;"><b>SAPLINGS ESTIMATION</b>
+  </li>
+
+</ul>
+</ion-row>
+
+</ion-col>
+    </ion-grid>
+
+</ion-card>
+
+</div>
+<div *ngIf="soil" >
+
+  <ion-card style="border: 1.5px solid orangered;">
+   
+      <ion-grid >
+<ion-col >
+ <ion-row  class="ion-justify-content-center" >
+ 
+    <img  src="../../assets/infos/soiltest.png" alt="">
+  
+ </ion-row>
+<ion-row class="ion-justify-content-center">
+  <ion-card-title>Soil Test</ion-card-title>
+</ion-row>
+<ion-row  class="ion-justify-content-center" >
+ 
+  <img  src="../../assets/infos/soiltestimagekk.PNG" alt="">
+
+</ion-row>
+
+</ion-col>
+      </ion-grid>
+
+  </ion-card>
+</div>
+<div *ngIf="showstage" >
+
+  <ion-card style="border: 1.5px solid orangered;">
+   
+    <ion-grid >
+<ion-col >
+<ion-row  class="ion-justify-content-center" >
+
+  <img  src="../../assets/infos/silwormstages.png" alt="">
+
+</ion-row>
+<div style="padding-top: 5%;"></div>
+
+<ion-row class="ion-justify-content-center">
+<ion-card-title>SilkWorm Stages</ion-card-title>
+</ion-row>
+<ion-row  class="ion-justify-content-center" >
+
+<img  src="../../assets/infos/silkrearing.PNG" alt="">
+
+</ion-row>
+<div style="padding-top: 5%;"></div>
+<ion-item-divider style="color: black;"></ion-item-divider>
+<div style="padding-top: 5%;"></div>
+
+<ion-row  class="ion-justify-content-center" >
+
+  <img  src="../../assets/infos/feedingfrq.PNG" alt="">
+  
+  </ion-row>
+
+</ion-col>
+    </ion-grid>
+
+</ion-card>
+
+
+</div>
+</div>
+
+
+
+
+
+
+</ion-content>
+
+<ion-footer class="ion-no-border" >
+  <ion-button size="large" style="width: 100%;" color="success" (click)="callme()">  <ion-icon   style="color: black;"  src="../../assets/call-sharp.svg" name="call-sharp"></ion-icon>&nbsp;&nbsp;Ask Advice</ion-button>
+  
+</ion-footer>

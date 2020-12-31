@@ -24,3 +24,11 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+ion-fab-button {
+    --box-shadow:none
+    }
+
+    .sc-ion-alert-md-h {
+        --min-width: 300px
+    }

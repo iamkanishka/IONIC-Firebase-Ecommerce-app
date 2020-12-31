@@ -1,0 +1,501 @@
+<ion-header>
+  <ion-toolbar  color="success">
+    <ion-buttons slot="start"  >
+    <ion-icon   color="light" name="arrow-back-outline" *ngIf="showback"  src="../../assets/arrow-back-outline.svg" size="large" (click)="gobacktoorders()" ></ion-icon>
+  </ion-buttons>
+    <ion-title>Batches-Place Order</ion-title>
+    <div slot="end" style="padding-right: 1.5%;padding-top: 2%;" *ngIf="!showfilter&&this.showcontd&&this.showconto&&showspin"  >
+      <ion-icon size="large"  style="color: black;" (click)="this.showfilter=true;"  src="../../assets/filter-sharp.svg" name="filter-sharp"></ion-icon>
+      <!-- <ion-badge  *ngIf="this.nnnumber!=0"  slot="end" id="cart-badge">.</ion-badge> -->
+    </div>
+    <div slot="end" style="padding-right: 1.5%;padding-top: 2%;" *ngIf="showfilter&&this.showcontd&&this.showconto&&showspin"  >
+      <ion-icon size="large"  style="color: black;" (click)="cancelfilter()"  src="../../assets/filter-sharp.svg" name="filter-sharp"></ion-icon>
+      <ion-icon size="small"  style="color: black;" (click)="cancelfilter()"   name="close-outline"></ion-icon>
+      
+      <!-- <ion-badge  *ngIf="this.nnnumber!=0"  slot="end" id="cart-badge">.</ion-badge> -->
+    </div>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div *ngIf="showspin" >
+
+  <div   *ngIf="!showconto&&!showcontd"  >
+
+    <ion-grid   >
+  
+    
+      <ion-col  class="ion-align-self-center">
+        <div padding></div>
+        <div padding></div>
+  
+        <ion-row class="ion-justify-content-center">
+          <ion-label  style="color: green;font-size: 30px;font-family: lato;">Loading Batches </ion-label>
+          <ion-label  style="color: green;font-size: 30px;font-family: lato;"> Please Wait...</ion-label>
+          <ion-label  style="color: green;font-family: lato;" *ngIf="!this.showfilter" > Please Select Correspoding Batch</ion-label>
+
+          
+        </ion-row>
+   
+        <ion-row class="ion-justify-content-center" >
+         
+          <img src="../../assets/loadin_gif.gif" alt=""><br>
+        </ion-row>
+       
+      </ion-col>
+    </ion-grid>
+    
+    </div>
+<!-- 
+<ion-grid>
+  <ion-col>
+<ion-row class="ion-justify-content-between">
+  <ion-chip style="background-color: rgb(67, 238, 67);">
+    <ion-icon name="location-outline" color="dark" 	></ion-icon>
+    <ion-label>Location</ion-label>
+   
+  </ion-chip>
+  <ion-chip style="background-color:rgb(67, 238, 67);;"	>
+    <ion-icon name="reorder-four-outline" color="dark" ></ion-icon>
+    <ion-label>Variety</ion-label>
+    
+  </ion-chip>
+  <ion-chip style="background-color: rgb(67, 238, 67);;">
+    <ion-icon name="calendar-outline" color="dark" ></ion-icon>
+    <ion-label>Disp Date</ion-label>
+ 
+  </ion-chip>
+  </ion-row>
+</ion-col>
+
+</ion-grid> -->
+<!-- 
+(ionChange)="onChange($event,item)" -->
+  <div class="col" *ngIf="showfilter&&this.showcontd&&this.showconto" >
+<div class="row">
+  <ion-chip style="background-color: rgb(67, 238, 67);" (click)="showlocopts()" *ngIf="locopb"  >
+    <ion-icon name="location-outline" color="dark" 	></ion-icon>
+    <ion-label>Location</ion-label>
+   
+  </ion-chip>
+  <ion-chip style="background-color: rgb(67, 135, 238);"   *ngIf="!locopb"  >
+    <ion-icon name="location-outline" color="light" 	></ion-icon>
+    <ion-label style="color: white;">Location</ion-label>
+  </ion-chip>
+
+  <ion-chip style="background-color:rgb(67, 238, 67);"(click)="showvaropts()" *ngIf="varopb" 	>
+    <ion-icon name="reorder-four-outline" color="dark" ></ion-icon>
+    <ion-label   >Variety</ion-label>
+    
+  </ion-chip>
+
+  <ion-chip style="background-color:rgb(67, 135, 238);" *ngIf="!varopb" 	>
+    <ion-icon name="reorder-four-outline" color="light" ></ion-icon>
+    <ion-label style="color: white;">Variety</ion-label>
+    
+  </ion-chip>
+
+  <ion-chip style="background-color: rgb(67, 238, 67);" (click)="showcal()" *ngIf="datopb" >
+    <ion-icon name="calendar-outline" color="dark" ></ion-icon>
+    <ion-label>Disp Date</ion-label>
+ 
+  </ion-chip>
+
+
+
+ 
+ 
+  <ion-chip style="background-color: rgb(67, 135, 238);"  *ngIf="!datopb">
+    <ion-icon name="calendar-outline" color="light" ></ion-icon>
+    <ion-label style="color: white;">Disp Date</ion-label>
+ 
+  </ion-chip>
+ 
+    <ion-icon size=large name="close-outline" color="dark" (click)="canop()"  ></ion-icon>
+    
+ 
+ 
+</div>
+</div>
+
+
+
+
+  <div *ngFor="let itemm of mbatches" >
+
+<div *ngIf="showconto&&showcontd">
+
+<ng-container *ngIf="itemm.length!=0" >
+
+<div style="margin-top: 2%;margin-left: 7%;"> 
+  <ion-label style="color: black;font-family: lato;font-size: 35px;" (click)="callcrc(itemm[0].cname,itemm[0].username,itemm[0].cphone)">
+    <b>{{itemm[0].cname}}</b>
+     </ion-label><br>
+ <div style="color: black;font-family: lato;font-size: 15px;" (click)="callcrc(itemm[0].cname,itemm[0].username,itemm[0].cphone)" >
+            <b>{{itemm[0].username}}</b>-<b>{{itemm[0].cphone}}</b>
+ </div>
+
+ <div style="color: black;font-family: lato;font-size: 15px;" (click)="callcrc(itemm[0].cname,itemm[0].username,itemm[0].cphone)" >
+  <b>{{itemm[0].cstate}}</b>-<b>{{itemm[0].cdistrict}}</b>-<b>{{itemm[0].ctown}}</b>
+</div>
+      
+    </div>
+
+
+
+
+
+  <div class="me"  >
+    
+    <ion-slides autoplay="3000" pager >
+   
+ 
+      <ion-slide   *ngFor="let item of itemm"  >
+        <ion-card class="c"  style="border: 2px solid orangered;
+        border-radius: 25px;">
+        <div style="margin-left:3% ;margin-right:3% ; margin-top:2% ;">
+          <ion-grid>
+            <ion-row class="ion-justify-content-between">
+              <div >
+                <ion-label>Variety -
+                  </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+               <b> {{item.variety}}</b>
+                </ion-label>
+                
+              </div>
+             
+              <div>
+                <ion-label  >
+                  Quantity -       
+                </ion-label  >
+                <ion-label style="color: black;font-family: lato;">
+               <b> {{item.size-item.sizeused}}</b>
+                </ion-label>
+              </div>
+            </ion-row>
+            <div style="padding: 2%;"></div>
+
+            <ion-row  class="ion-justify-content-between">
+              <div>
+                <ion-label >
+                 <!-- Hatch<ion-icon  name="today-outline" src="../../assets/today-outline.svg"></ion-icon> - -->
+                 HatchDate -
+
+                  </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+             <b> {{item.rfmdate}}</b>              
+              </ion-label>
+                
+              </div>
+             
+              <div>
+                <ion-label >
+                 <!-- Hatch<ion-icon  name="today-outline" src="../../assets/today-outline.svg"></ion-icon> - -->
+                 Hatch% -
+
+                  </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+             <b> {{item.hper}}</b>              
+              </ion-label>
+                
+              </div>
+            </ion-row>
+
+            <div style="padding: 2%;"></div>
+
+            <ion-row class="ion-justify-content-between">
+              <div >
+                <ion-label >
+                 InDate -
+                  </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+             <b>  {{item.ridate}} </b>              
+              </ion-label>
+                
+              </div>
+             
+              <div>
+                <ion-label >
+            DispDate -    
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+              <b>  {{item.rddate}} </b>
+              </ion-label>
+            </div>
+            </ion-row>
+            <div style="padding: 2%;"></div>
+            <ion-row class="ion-justify-content-between">
+              <div>
+                <ion-label >
+            Price -    
+                </ion-label>
+                <ion-label style="color: black;font-family: lato;">
+              <b>  {{item.price| currency:"₹"}} </b>
+              </ion-label>
+            </div>
+  
+              <ion-button color="success" (click)="order(item)" >Place Order</ion-button>
+             
+
+         
+            </ion-row>
+            <div style="padding: 1%;"></div>
+          </ion-grid>
+
+         
+        </div>
+        </ion-card>
+      </ion-slide>
+
+     
+     
+    </ion-slides>
+  </div>
+</ng-container>
+
+</div>
+</div>
+
+
+</div>
+
+
+<ion-label>{{this.realdates}}</ion-label>
+
+<div *ngIf="!showspin&&showordstatus" >
+
+  <ion-col >
+    <ion-row>
+      
+      <ion-card class="c">
+        <ion-card-header>
+          <ion-card-title>
+            <ion-skeleton-text animated style="width: 50%" *ngIf="!showdetails"  ></ion-skeleton-text>
+          
+           
+            <div  *ngIf="showdetails" style="font-size: 25px;">Order Summary</div>
+         
+          </ion-card-title>
+        </ion-card-header>
+      <ion-card-content>
+         <ion-grid>
+          <ion-row *ngIf="!showdetails">
+            <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text> 
+           </ion-row> 
+          <ion-row *ngIf="showdetails">
+            <ion-label color="dark" style="font-size: 25px;"><b>Delivery Address</b></ion-label>
+           </ion-row>
+           
+
+
+           <ion-row *ngIf="!showdetails">
+            <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text> 
+            <ion-skeleton-text animated style="width: 100%" ></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 60%" ></ion-skeleton-text>
+            <ion-skeleton-text animated style="width: 80%" ></ion-skeleton-text>
+
+           
+             
+
+           </ion-row>
+         <ion-row *ngIf="showdetails">
+          <ion-label color="dark" style="width: 100%" >{{ordcusdata.fullname}}</ion-label><br>
+          <ion-label color="dark" >{{ordcusdata.address}}</ion-label><br>
+          <ion-label color="dark">{{ordcusdata.village}}-{{ordcusdata.pincode}}</ion-label><br>
+          <ion-label color="dark">{{ordcusdata.town}}-{{ordcusdata.district}}-{{ordcusdata.state}}</ion-label><br>
+         </ion-row>
+
+           <div style="padding-top: 5%;"></div>
+
+
+           <ion-row  class="ion-justify-content-between" *ngIf="!showdetails" >
+            <div style="width: 90%"  >
+            <ion-card-title>
+              <ion-skeleton-text animated style="width: 50%"  ></ion-skeleton-text>
+              </ion-card-title>
+            <ion-skeleton-text animated  style="width: 50%" ></ion-skeleton-text>
+           </div>
+          <ion-card-title style="width: 10%" >
+             <ion-skeleton-text animated ></ion-skeleton-text>
+          </ion-card-title>
+            
+          </ion-row>
+
+
+          
+          <ion-row  class="ion-justify-content-between" *ngIf="showdetails">
+            <div>
+            <ion-card-title>
+             <div>{{this.batchdata.variety}}</div>
+           </ion-card-title>
+          <ion-label color="dark">Seller-{{this.batchdata.cname}}</ion-label>
+          </div>
+           <ion-card-title>
+        {{this.batchdata.price|currency:"₹"}}
+          </ion-card-title>
+            
+          </ion-row>
+
+
+        <ion-row class="ion-justify-content-between" *ngIf="!showdetails" >
+
+
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-skeleton-text animated style="width: 20%" ></ion-skeleton-text>
+
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-skeleton-text animated style="width: 40%" ></ion-skeleton-text>
+
+           </ion-row >
+          </ion-grid>
+
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-skeleton-text animated style="width: 20%" ></ion-skeleton-text>
+
+            </ion-row>
+            <ion-row class="ion-justify-content-center" >
+              <ion-skeleton-text animated style="width: 40%" ></ion-skeleton-text>
+
+           </ion-row>
+          </ion-grid>
+          
+          <ion-grid>
+            <ion-row class="ion-justify-content-center">
+              <ion-skeleton-text animated style="width: 30%" ></ion-skeleton-text>
+
+            </ion-row>
+            <ion-row class="ion-justify-content-center">
+              <ion-skeleton-text animated style="width: 40%" ></ion-skeleton-text>
+
+           </ion-row>
+          </ion-grid>
+        </ion-row>
+        <div style="padding-top: 5%;"></div>
+
+  <ion-row class="ion-justify-content-between" *ngIf="showdetails" >
+        
+     
+               <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark" style="font-size: 22px;"> <b>{{quant}}</b>
+                  </ion-label>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark"> <b> Quantity </b>
+                  </ion-label>
+               </ion-row >
+              </ion-grid>
+
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark"  style="font-size: 22px;" ><b>{{this.batchdata.price|currency:"₹"}}</b>
+                  </ion-label>
+                </ion-row>
+                <ion-row class="ion-justify-content-center" >
+                  <ion-label color="dark"> <b>Price</b>
+                  </ion-label>
+               </ion-row>
+              </ion-grid>
+              
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark" style="font-size: 22px;"> <b> {{total|currency:"₹"}}</b>
+                  </ion-label>
+                </ion-row>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label color="dark"><b> Total </b>
+                  </ion-label>
+               </ion-row>
+              </ion-grid> 
+           
+            </ion-row>
+            <div style="padding-top: 5%;"></div>
+        
+
+        <ion-row class="ion-justify-content-center">
+    <ion-skeleton-text animated style="width: 60%" *ngIf="!showdetails"></ion-skeleton-text>
+
+<ion-label color="dark" style="font-size: 20px;" *ngIf="showdetails">
+ <b>Delivery on  26/2/2020</b> 
+</ion-label>
+        </ion-row>
+        <div style="padding-top: 5%;"></div>
+
+        <ion-row class="ion-justify-content-between">
+          <ion-skeleton-text animated style="width: 40%" *ngIf="!showdetails" ></ion-skeleton-text>
+          <ion-button color="light" (click)="this.showspin=true;
+          this.showspinord=false;this.showdetails=false;"  *ngIf="showdetails"  >Cancel</ion-button>
+
+
+          <ion-button color="success"  *ngIf="showdetails" (click)="addemp();this.showback=false"  >Place Order</ion-button>
+          <!-- <ion-spinner name="crescent" color="success" *ngIf="!showlogbut"></ion-spinner> -->
+        </ion-row>
+
+         </ion-grid>
+         
+         
+        </ion-card-content>
+      </ion-card>
+     
+       
+    </ion-row >
+ 
+  </ion-col>
+</div>
+
+<ion-grid>
+  <ion-col  class="ion-align-self-center">
+<ion-grid>
+  <ion-col  class="ion-align-self-center">
+    <ion-row class="ion-justify-content-center" *ngIf="orderplaced">
+      <img class="silk" src="../../assets/success.gif" alt=""><br>
+     
+        <ion-label style="color: green;font-size: 25px;font-family: lato;">
+       Order Placed
+  </ion-label>
+ 
+
+  </ion-row>
+  <ion-row class="ion-justify-content-center" *ngIf="orderplaced">
+    <ion-button color="success"  *ngIf="showdetails" (click)="gobacktoorders();this.showback=true"  >OK</ion-button>
+  </ion-row>
+  <ion-row class="ion-justify-content-center"  *ngIf="ordering">
+    <img class="silk" src="../../assets/sandclock.gif" alt=""><br>
+   
+      <ion-label style="color: green;font-size: 25px;font-family: lato;">
+    Placing Order...
+</ion-label>
+</ion-row>
+<ion-row class="ion-justify-content-center" *ngIf="orderfailed">
+  <img class="silk" src="../../assets/failed.png" alt=""><br>
+ 
+    <ion-label style="color: green;font-size: 25px;font-family: lato;">
+   Order Did Not Placed...
+</ion-label>
+<ion-label style="color: green;font-size: 25px;font-family: lato;">
+  Something Went Wrong.
+</ion-label>
+</ion-row>
+  </ion-col>
+</ion-grid>
+</ion-col>
+</ion-grid>
+
+<!-- 
+  <div class="ion-padding custom-skeleton">
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+    <ion-skeleton-text animated></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 88%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+    <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+  </div> -->
+
+
+
+  
+
+</ion-content>

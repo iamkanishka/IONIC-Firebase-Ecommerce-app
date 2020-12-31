@@ -1,5 +1,7 @@
 {
   "name": "smartcrcapp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

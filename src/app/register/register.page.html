@@ -1,0 +1,696 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-icon color="light" name="arrow-back-outline" *ngIf="!this.gettype&&this.next&&this.homen" src="../../assets/arrow-back-outline.svg"
+        size="large" (click)="this.gettype=true;this.cusregform.reset();this.supregform.reset();this.selectstatesform.reset()"></ion-icon>
+   
+
+    <ion-icon color="light" name="arrow-back-outline" *ngIf="!this.next&&this.homen&&!this.showregafter;" src="../../assets/arrow-back-outline.svg"
+        size="large" (click)="this.tireme=false;second()"></ion-icon>
+ 
+    
+    <ion-icon color="light" name="arrow-back-outline" *ngIf="!this.homen&&!this.showregafter&&this.next" src="../../assets/arrow-back-outline.svg"
+    size="large" (click)="gotohome();third();"></ion-icon>
+    <ion-icon color="light" name="arrow-back-outline" *ngIf="!this.homen&&!this.next&&!this.showregafter;" src="../../assets/arrow-back-outline.svg"
+    size="large" (click)="second();third();"></ion-icon>
+</ion-buttons>
+
+    <ion-title>Registration</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+
+  <ion-grid *ngIf="this.gettype" class="haha">
+    <ion-col class="ion-align-self-center">
+
+      <ion-row class="ion-justify-content-center">
+        <ion-label style="color: green;font-size: 25px;font-family: lato;">
+          I am...
+        </ion-label>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-grid>
+          <ion-col>
+            <div (click)="cussel()">
+
+              <ion-row class="ion-justify-content-center">
+
+                <img class="kmkmkm" src="../../assets/farmer.jpg" alt=""><br>
+              </ion-row>
+            </div>
+
+            <ion-row class="ion-justify-content-center">
+
+              <ion-label style="color: green;font-size: 30px;font-family: lato;">
+                Farmer
+              </ion-label>
+            </ion-row>
+          </ion-col>
+        </ion-grid>
+      </ion-row>
+      <ion-item-divider></ion-item-divider>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-grid>
+          <ion-col>
+            <div (click)="supsel()">
+              <ion-row class="ion-justify-content-center">
+
+
+                <img class="kmkmkm" src="../../assets/supervisor.jpg" alt=""><br>
+
+              </ion-row>
+            </div>
+            <ion-row class="ion-justify-content-center">
+
+              <ion-label style="color: green;font-size: 30px;font-family: lato;">
+                Supervisor
+              </ion-label>
+            </ion-row>
+
+            
+
+            <ion-row class="ion-justify-content-center">
+
+              <ion-label style="color: green;font-size: 15px;font-family: lato;" (click)="gotologin()" >
+               <u> Back</u>
+              </ion-label>
+            </ion-row>
+
+
+          </ion-col>
+        </ion-grid>
+
+
+      </ion-row>
+      <div>
+
+      </div>
+      <!-- <ion-row justify-content-center padding>
+      <div  padding></div>
+      <ion-button color="success" (click)="getstarted()">Get Started</ion-button>
+    
+    </ion-row> -->
+    </ion-col>
+  </ion-grid>
+
+
+
+
+  <ion-grid *ngIf="!this.gettype&&this.selection=='Customer'&&this.next" class="logp">
+
+    <ion-col  class="ion-align-self-center">
+
+
+      <ion-row class="ion-justify-content-center">
+        <img class="silk" src="../../assets/icon.png" alt=""><br>
+
+      </ion-row>
+      <div padding></div>
+      <ion-row class="ion-justify-content-center">
+        <ion-label style="color: green;font-size: 40px;font-family: lato;">Register</ion-label>
+        <ion-label style="color: black;font-size: 20px;font-family: lato;">Customer</ion-label>
+
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center" padding>
+
+
+        <form [formGroup]="cusregform">
+          <ion-item>
+            <ion-label position="floating">Enter Fullname</ion-label>
+            <ion-input type="text" formControlName="fullname" clearInput></ion-input>
+          </ion-item>
+
+
+
+          <ion-item>
+            <ion-label position="floating">Enter ADHAAR Number</ion-label>
+
+            <ion-input type="tel" formControlName="adharno" clearInput></ion-input>
+          </ion-item>
+
+
+
+          <ion-item>
+            <ion-label position="floating">Enter Phone Number</ion-label>
+            <ion-input type="tel" formControlName="phone" clearInput></ion-input>
+          </ion-item>
+
+
+          <ion-item>
+
+            <ion-label>Select State</ion-label>
+            <ion-select placeholder="States" formControlName="state">
+
+              <ion-select-option *ngFor="let smar of states; let msi = index" [value]="smar.value">{{smar.value}}
+              </ion-select-option>
+
+            </ion-select>
+          </ion-item>
+
+
+
+          <ion-item>
+
+            <ion-label>Select District</ion-label>
+            <ion-select placeholder="Districts" formControlName="district">
+
+              <ion-select-option *ngFor="let dmar of districts; let mdi = index" [value]="dmar.value">{{dmar.value}}
+              </ion-select-option>
+
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label>Select Taluk</ion-label>
+            <ion-select placeholder="Taluk" formControlName="town">
+
+              <ion-select-option *ngFor="let tmar of towns; let mti = index" [value]="tmar.value">{{tmar.value}}
+              </ion-select-option>
+
+            </ion-select>
+          </ion-item>
+
+
+
+
+
+
+          <ion-item>
+            <ion-label position="floating">Enter Address</ion-label>
+            <ion-input type="text" formControlName="address" clearInput></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Enter Village</ion-label>
+            <ion-input type="text" formControlName="village" clearInput></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Enter Pincode</ion-label>
+            <ion-input type="tel" formControlName="pincode" clearInput></ion-input>
+          </ion-item>
+
+
+          <ion-item>
+            <ion-label position="floating">Enter Land Holding(in acres)</ion-label>
+            <ion-input type="tel" formControlName="land" clearInput></ion-input>
+          </ion-item>
+
+
+
+
+          <ion-item>
+
+            <ion-label>Cultivation Types</ion-label>
+            <ion-select placeholder="Select Cultivation Type" formControlName="culttype">
+              <ion-select-option *ngFor="let item of cccat" [value]="item.value" >{{item.value}}</ion-select-option>
+
+            </ion-select>
+          </ion-item>
+
+        </form>
+
+
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+
+        <ion-label style="color: green;font-size: 20px;font-family: lato;">Select CRC's States</ion-label>
+
+
+        <form [formGroup]="selectstatesform">
+
+          <ion-item>
+
+            <ion-label>Select State/s</ion-label>
+            <ion-select placeholder="States" multiple="true" formControlName="selstates">
+
+              <ion-select-option *ngFor="let scmar of states; let msci = index" [value]="scmar.value">{{scmar.value}}
+              </ion-select-option>
+
+            </ion-select>
+          </ion-item>
+        </form>
+
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center" padding>
+
+        <ion-button color="success" (click)="this.searchcrc()" *ngIf="showlogbut"
+          [disabled]="this.cusregform.invalid||this.selectstatesform.invalid" size="large">Search CRCs</ion-button>
+        <!-- <ion-spinner name="crescent" color="success" *ngIf="!showlogbut"></ion-spinner> -->
+      </ion-row>
+
+      <!-- <ion-row class="ion-justify-content-center" padding >
+
+        <ion-label style="color: green;"><u>Registering as {{realshow}}</u></ion-label>
+      </ion-row> -->
+
+      <ion-row class="ion-justify-content-center" padding *ngIf="this.showback">
+
+        <ion-label style="color: green;" (click)="this.gettype=true;this.cusregform.reset();this.supregform.reset()">
+          <u>Back</u></ion-label>
+        <!-- {{this.device_token}} -->
+      </ion-row>
+
+    </ion-col>
+  </ion-grid>
+
+
+
+
+
+
+  <ion-grid *ngIf="!this.gettype&&this.selection=='Supervisor'&&this.next" class="logp">
+
+    <ion-col  class="ion-align-self-center">
+
+
+      <ion-row class="ion-justify-content-center">
+        <img class="silk" src="../../assets/icon.png" alt=""><br>
+
+      </ion-row>
+      <div padding></div>
+      <ion-row class="ion-justify-content-center">
+
+        <ion-label style="color: green;font-size: 40px;font-family: lato;">Register</ion-label>
+        <ion-label style="color: black;font-size: 20px;font-family: lato;">Supervisor</ion-label>
+
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center" padding>
+
+
+        <form [formGroup]="supregform">
+          <ion-item>
+            <ion-label position="floating">Enter Fullname</ion-label>
+            <ion-input type="text" formControlName="fullname" clearInput></ion-input>
+          </ion-item>
+
+
+
+          <ion-item>
+            <ion-label position="floating">Enter ADHAAR Number</ion-label>
+
+            <ion-input type="tel" formControlName="adharno" clearInput></ion-input>
+          </ion-item>
+
+
+
+          <ion-item>
+            <ion-label position="floating">Enter Phone Number</ion-label>
+            <ion-input type="tel" formControlName="phone" clearInput></ion-input>
+          </ion-item>
+
+
+          <ion-item>
+
+            <ion-label>Select State</ion-label>
+            <ion-select placeholder="States" formControlName="state">
+
+              <ion-select-option *ngFor="let smar of states; let msi = index" [value]="smar.value">{{smar.value}}
+              </ion-select-option>
+
+            </ion-select>
+          </ion-item>
+
+
+
+          <ion-item>
+
+            <ion-label>Select District</ion-label>
+            <ion-select placeholder="Districts" formControlName="district">
+
+              <ion-select-option *ngFor="let dmar of districts; let mdi = index" [value]="dmar.value">{{dmar.value}}
+              </ion-select-option>
+
+            </ion-select>
+          </ion-item>
+
+          <ion-item>
+
+            <ion-label>Select Taluk</ion-label>
+            <ion-select placeholder="Taluks" formControlName="town">
+
+              <ion-select-option *ngFor="let tmar of towns; let mti = index" [value]="tmar.value">{{tmar.value}}
+              </ion-select-option>
+
+            </ion-select>
+          </ion-item>
+
+
+
+
+
+
+          <ion-item>
+            <ion-label position="floating">Enter Address</ion-label>
+            <ion-input type="text" formControlName="address" clearInput></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Enter Village</ion-label>
+            <ion-input type="text" formControlName="village" clearInput></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="floating">Enter Pincode</ion-label>
+            <ion-input type="tel" formControlName="pincode" clearInput></ion-input>
+          </ion-item>
+
+
+        </form>
+
+
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+
+        <ion-label style="color: green;font-size: 20px;font-family: lato;">Select CRC's States</ion-label>
+
+
+        <form [formGroup]="selectstatesform">
+
+          <ion-item>
+
+            <ion-label>Select State/s</ion-label>
+            <ion-select placeholder="States" multiple="true" formControlName="selstates">
+
+              <ion-select-option *ngFor="let ssmar of states; let mssi = index" [value]="ssmar.value">{{ssmar.value}}
+              </ion-select-option>
+
+            </ion-select>
+          </ion-item>
+        </form>
+
+      </ion-row>
+
+
+
+
+      <ion-row class="ion-justify-content-center" padding>
+
+        <ion-button color="success" (click)="this.searchcrc()" *ngIf="showlogbut" size="large"
+          [disabled]="this.supregform.invalid||this.selectstatesform.invalid">Search CRCs</ion-button>
+        <!-- <ion-spinner name="crescent" color="success" *ngIf="!showlogbut"></ion-spinner> -->
+      </ion-row>
+
+      <!-- <ion-row class="ion-justify-content-center" padding>
+
+        <ion-label style="color: green;"><u>Registering as {{realshow}}</u></ion-label>
+      </ion-row> -->
+
+      <ion-row class="ion-justify-content-center" padding *ngIf="this.showback">
+
+        <ion-label style="color: green;" (click)="this.gettype=true;this.cusregform.reset();this.supregform.reset()">
+          <u>Back</u></ion-label>
+        <!-- {{this.device_token}} -->
+      </ion-row>
+
+    </ion-col>
+  </ion-grid>
+
+
+
+  <div *ngIf="this.showregload" >
+
+    <ion-grid *ngIf="!showcrcs" >
+    <ion-col class="ion-align-self-center"  class="logp">
+
+
+      <div padding></div>
+      <div padding></div>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-label style="color: green;font-size: 30px;font-family: lato;">Loading CRCs </ion-label>
+        <ion-label style="color: green;font-size: 30px;font-family: lato;"> Please Wait...</ion-label>
+        <ion-label style="color: green;font-family: lato;"> Please Select Preffered CRC/s</ion-label>
+
+
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center"  *ngIf="!showcrcs" >
+
+        <img src="../../assets/loadin_gif.gif" alt=""><br>
+      </ion-row>
+
+    </ion-col>
+
+
+  </ion-grid>
+
+  <ion-grid *ngIf="showcrcs">
+
+    <ion-col  >
+
+      <ng-container *ngIf="mbatches.length!=0" >
+
+
+      <ion-label style="color: black;font-family: lato;font-size: 35px;">CRCs</ion-label>
+
+
+      <div *ngFor="let itemm of mbatches">
+
+<ng-container *ngIf="itemm.length!=0&&mbatches.length!=0" >
+
+
+        <div style="margin-top: 2%;margin-left: 7%;">
+          <ion-label style="color: black;font-family: lato;font-size: 35px;">
+            <b>{{itemm[0].astate}}</b>
+          </ion-label>
+        </div>
+
+
+
+
+
+        <div class="me">
+
+          <ion-slides autoplay="3000" pager>
+ <ion-slide *ngFor="let item of itemm">
+              <ion-card class="c" style="border: 2px solid orangered;
+            border-radius: 25px;">
+                <div style="margin-left:3% ;margin-right:3% ; margin-top:2% ;">
+                  <ion-grid>
+                    <ion-row class="ion-justify-content-between">
+                      <div>
+                        <ion-label>CRC Name -
+                        </ion-label>
+                        <ion-label style="color: black;font-family: lato;">
+                          <b> {{item.acname}}</b>
+                        </ion-label>
+
+                      </div>
+
+                      <div>
+                        <ion-label>
+                          CRC Phone -
+                        </ion-label>
+                        <ion-label style="color: black;font-family: lato;">
+                          <b> {{item.aphone}}</b>
+                        </ion-label>
+                      </div>
+
+
+                      <div>
+                      
+    
+                        <ion-icon  src="../../assets/star-sharp.svg"></ion-icon>
+                        <ion-label style="color: black;font-family: lato;">
+                          <b> {{(item.zcbrating+item.zbvrating+item.zp1rating+item.zpurating)/4|number : '1.1-1'}}({{item.zrcountcb+item.zrcountbv+item.zrcountp1+item.zrcountpu}})</b>
+                        </ion-label>
+    
+                      </div>
+
+                    </ion-row>
+                    <div style="padding: 2%;"></div>
+
+                    <ion-row class="ion-justify-content-between">
+                      <div>
+                        <ion-label>
+                          District -
+                        </ion-label>
+                        <ion-label style="color: black;font-family: lato;">
+                          <b> {{item.adistrict}} </b>
+                        </ion-label>
+
+                      </div>
+
+                      <div>
+                        <ion-label>
+                          Taluk -
+                        </ion-label>
+                        <ion-label style="color: black;font-family: lato;">
+                          <b> {{item.atown}} </b>
+                        </ion-label>
+
+                      </div>
+                    </ion-row>
+
+                    <div style="padding: 2%;"></div>
+
+                    <ion-row class="ion-justify-content-center">
+                      <ion-label style="color: black;font-size: 150x;font-family: lato;">Varieties</ion-label>
+                    </ion-row>
+
+
+
+
+                    <ion-row class="ion-justify-content-between">
+                      <div>
+                        <ion-label>
+
+                          Cross Breed(CB)-
+
+                        </ion-label>
+                        <ion-label style="color: black;font-family: lato;">
+                          <b> {{item.ztcbtot}}</b>
+                        </ion-label>
+                        <br>
+                        <ion-icon src="../../assets/star-sharp.svg"></ion-icon>
+                        <ion-label style="color: black;font-family: lato;">
+                          <b> {{item.zcbrating}}({{item.zrcountcb}})</b>
+                        </ion-label>
+
+                      </div>
+
+
+                      <div>
+                        <ion-label>
+
+                          BV P1 Seed -
+
+                        </ion-label>
+                        <ion-label style="color: black;font-family: lato;">
+                          <b> {{item.ztp1tot}}</b>
+                        </ion-label>
+
+                        <br>
+
+                        <ion-icon src="../../assets/star-sharp.svg"></ion-icon>
+                        <ion-label style="color: black;font-family: lato;">
+                          <b> {{item.zp1rating}}({{item.zrcountp1}})</b>
+                        </ion-label>
+
+                      </div>
+
+
+
+
+
+                    </ion-row>
+
+
+                    <ion-row class="ion-justify-content-between">
+
+                      <div>
+                        <ion-label>
+                          Bivoltine(BV) -
+                        </ion-label>
+                        <ion-label style="color: black;font-family: lato;">
+                          <b> {{item.ztbvtot}} </b>
+                        </ion-label>
+                        <br>
+
+                        <ion-icon src="../../assets/star-sharp.svg"></ion-icon>
+                        <ion-label style="color: black;font-family: lato;">
+                          <b> {{item.zbvrating}}({{item.zrcountbv}})</b>
+                        </ion-label>
+
+
+                      </div>
+                      <div>
+                        <ion-label>
+                          Pure Mysore -
+                        </ion-label>
+                        <ion-label style="color: black;font-family: lato;">
+                          <b> {{item.ztputot}} </b>
+                        </ion-label>
+                        <br>
+                        <ion-icon src="../../assets/star-sharp.svg"></ion-icon>
+                        <ion-label style="color: black;font-family: lato;">
+                          <b> {{item.zpurating}}({{item.zrcountpu}})</b>
+                        </ion-label>
+
+
+                      </div>
+                    </ion-row>
+
+
+                    <ion-row class="ion-justify-content-center">
+
+
+                      <ion-checkbox (ionChange)="onChange($event,item)"></ion-checkbox>
+
+
+                    </ion-row>
+
+                    <div style="padding: 2%;"></div>
+                  </ion-grid>
+
+
+                </div>
+              </ion-card>
+            </ion-slide>
+
+
+
+          </ion-slides>
+        </div>
+
+      </ng-container>
+      </div>
+
+
+
+
+
+      <div style="padding: 2%;"></div>
+    
+
+
+      </ng-container>
+
+
+
+    </ion-col>
+  </ion-grid>
+
+</div>
+
+
+  <ion-grid *ngIf="this.showregafter" >
+     <ion-col class="ion-align-self-center"  class="logp">
+      <ion-row class="ion-justify-content-center">
+        <ion-label style="color: green;font-size: 30px;font-family: lato;">{{loadcontent}}</ion-label>
+
+
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <img src="../../assets/loadin_gif.gif" alt=""><br>
+      </ion-row>
+    </ion-col>
+  </ion-grid>
+
+
+
+
+</ion-content>
+
+
+<ion-footer class="ion-no-border" *ngIf="this.showregload" >
+  
+  
+  <ion-row class="ion-justify-content-center">
+
+
+      
+
+    <ion-button size="large" style="width: 100%;" color="success" (click)="makeregister()" *ngIf="this.mbatches!=null&&this.mbatches.length>=1"  [disabled]="this.iddata.length==0" >REGISTER</ion-button>
+  </ion-row>
+</ion-footer>

@@ -1,0 +1,179 @@
+<ion-header>
+  <ion-toolbar style="color: white;" color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Queries
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="c">
+  <div *ngIf="!showuq">
+
+    <ion-grid>
+
+
+      <ion-col class="ion-align-self-center">
+        <div padding></div>
+        <div padding></div>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-label style="color: green;font-size: 30px;font-family: lato;">Loading your Queries </ion-label>
+          <ion-label style="color: green;font-size: 30px;font-family: lato;"> Please Wait...</ion-label>
+
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center">
+
+          <img src="../../assets/loadin_gif.gif" alt=""><br>
+        </ion-row>
+
+      </ion-col>
+    </ion-grid>
+
+  </div>
+  <ng-container *ngIf="showuq" >
+
+<div *ngIf="orddata.length==0" >
+  <ion-grid>
+
+
+    <ion-col class="ion-align-self-center">
+      <div padding></div>
+      <div padding></div>
+
+     
+
+      <ion-row class="ion-justify-content-center">
+
+        <img src="../../assets/customerser.png" alt=""><br>
+      </ion-row>
+
+      <ion-row class="ion-justify-content-center">
+        <ion-label style="color: green;font-size: 30px;font-family: lato;">No UserQueries</ion-label>
+       
+      </ion-row>
+
+    </ion-col>
+  </ion-grid>
+
+</div>
+
+
+
+  <ng-container *ngIf="orddata.length!=0" >
+
+  <ng-container *ngFor="let oitem of orddata" >
+    <div style="margin-right:6% ;padding-top: 1%;">
+  <ion-card class="c" style="border: 2px solid royalblue;
+  border-radius: 25px;">
+            <div style="margin-left:3% ;margin-right:3% ; margin-top:2% ;">
+              <ion-grid>
+                <ion-row class="ion-justify-content-center">
+                  <ion-label style="color: black;font-family: lato;font-size: 30px;">
+                    <b> {{oitem.cname}}</b>
+                  </ion-label>
+
+                </ion-row>
+                 
+
+
+                <ion-row class="ion-justify-content-between">
+                  <div>
+                    <ion-label>Variety -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{oitem.variety}}</b>
+                    </ion-label>
+
+                  </div>
+
+                  <div>
+                    <ion-label>
+                      Quantity -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{oitem.dfls}}</b>
+                    </ion-label>
+                  </div>
+                </ion-row>
+                <div style="padding: 2%;"></div>
+
+                <ion-row class="ion-justify-content-between">
+                  <div>
+                    <ion-label>
+                      OrdDate -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{oitem.odate}} </b>
+                    </ion-label>
+
+                  </div>
+
+                  <div>
+                    <ion-label>
+                      DispDate -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{oitem.ddate}}</b>
+                    </ion-label>
+
+                  </div>
+                </ion-row>
+
+                <div style="padding: 2%;"></div>
+
+                <ion-row class="ion-justify-content-between">
+                  <div>
+                    <ion-label>
+                      QDate -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{oitem.tdate}} </b>
+                    </ion-label>
+
+                  </div>
+
+                  <div>
+                    <ion-label style="color: black;font-family: lato;">
+                      FailedStage -
+                    </ion-label>
+                    <ion-label style="color: black;font-family: lato;">
+                      <b> {{oitem.stage}} </b>
+                    </ion-label>
+                  </div>
+                </ion-row>
+                <div style="padding: 2%;"></div>
+                <ion-row class="ion-justify-content-center">
+                  <div>
+                    <ion-label  style="color: black;font-family: lato;font-size: 25px;">
+                      Status -
+                    </ion-label>
+                    <ion-label *ngIf="oitem.resstatus==false"  style="color: black;font-family: lato; font-size: 30px;">
+                      <b> On Enquiry </b>
+                   </ion-label>
+                   <ion-label *ngIf="oitem.resstatus"  style="color: black;font-family: lato;font-size: 30px;">
+                    <b> Solved </b>
+                 </ion-label>
+                  </div>
+
+                  <!-- <ion-button color="danger" (click)="cancelorder(oitem.oid,oitem.olicno)">
+                    <ion-icon slot="start" name="close"></ion-icon>
+                    Cancel Order
+                  </ion-button> -->
+
+                </ion-row>
+              </ion-grid>
+            </div>
+          </ion-card>
+        </div>
+          <div style="padding: 1%;"></div>
+
+  </ng-container>
+</ng-container>
+
+</ng-container>
+  
+</ion-content>

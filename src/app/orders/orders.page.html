@@ -1,0 +1,1305 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      My Orders
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" class="no-ripple" *ngIf="showorder">
+    <ion-fab-button (click)="createorder()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed" class="no-ripple" *ngIf="!showorder">
+    <ion-fab-button (click)="  this.showdetails=false; 
+    this.showorder=true;">
+      <ion-icon name="close-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <div *ngIf="!showconto&&!showcontd">
+
+    <ion-grid>
+
+
+      <ion-col class="ion-align-self-center">
+        <div padding></div>
+        <div padding></div>
+
+        <ion-row class="ion-justify-content-center">
+          <ion-label style="color: green;font-size: 30px;font-family: lato;">Loading your Orders </ion-label>
+          <ion-label style="color: green;font-size: 30px;font-family: lato;"> Please Wait...</ion-label>
+
+        </ion-row>
+
+        <ion-row class="ion-justify-content-center">
+
+          <img src="../../assets/loadin_gif.gif" alt=""><br>
+        </ion-row>
+
+      </ion-col>
+    </ion-grid>
+
+  </div>
+
+
+
+  <div *ngIf="showorder">
+
+    <!-- <div *ngFor="let itemm of dorddata" > -->
+
+      <div *ngFor="let itemm of this.d.data">
+      <!-- <div *ngFor="let itemm of showtheorders"> -->
+
+      <div *ngIf="showconto&&showcontd">
+
+
+        <div style="margin-top: 2%;margin-left: 7%;">
+          <ion-label style="color: black;font-family: lato;font-size: 35px;">
+            <b>{{itemm.myuser.cname}}</b>
+          </ion-label>
+        </div>
+
+
+
+
+
+        <div class="me">
+
+          <ion-slides autoplay="3000" pager>
+
+            <ng-container *ngFor="let oitem of orddata">
+
+
+
+
+
+  
+                
+              <ion-slide *ngIf="itemm.myuser.licno==oitem.licno">
+
+
+
+
+
+
+
+
+
+                <ion-card class="c" style="border: 2px solid royalblue;
+        border-radius: 25px;">
+                  <div style="margin-left:3% ;margin-right:3% ; margin-top:2% ;">
+                    <ion-grid>
+                      <ion-row class="ion-justify-content-between">
+                        <div>
+                          <ion-label>Variety -
+                          </ion-label>
+                          <ion-label style="color: black;font-family: lato;">
+                            <b> {{oitem.variety}}</b>
+                          </ion-label>
+
+                        </div>
+
+                        <div>
+                          <ion-label>
+                            Quantity -
+                          </ion-label>
+                          <ion-label style="color: black;font-family: lato;">
+                            <b> {{oitem.dflscount}}</b>
+                          </ion-label>
+                        </div>
+                      </ion-row>
+                      <div style="padding: 2%;"></div>
+
+                      <ion-row class="ion-justify-content-between">
+                        <div>
+                          <ion-label>
+                            OrdDate -
+                          </ion-label>
+                          <ion-label style="color: black;font-family: lato;">
+                            <b> {{oitem.ooodate}} </b>
+                          </ion-label>
+
+                        </div>
+
+                        <div>
+                          <ion-label>
+                            DispDate -
+                          </ion-label>
+                          <ion-label style="color: black;font-family: lato;">
+                            <b> {{oitem.ddddate}}</b>
+                          </ion-label>
+
+                        </div>
+                      </ion-row>
+
+                      <div style="padding: 2%;"></div>
+
+                      <ion-row class="ion-justify-content-between">
+                        <div>
+                          <ion-label>
+                            Total -
+                          </ion-label>
+                          <ion-label style="color: black;font-family: lato;">
+                            <b> {{oitem.total|currency:"₹"}}({{oitem.price|currency:"₹"}}) </b>
+                          </ion-label>
+
+                        </div>
+
+                        <div>
+                          <ion-label>
+                            Status -
+                          </ion-label>
+                          <ion-label style="color: black;font-family: lato;">
+                            <b> {{oitem.status}} </b>
+                          </ion-label>
+                        </div>
+                      </ion-row>
+                      <div style="padding: 2%;"></div>
+                      <ion-row class="ion-justify-content-center">
+
+                        <ion-button color="danger" (click)="cancelorder(oitem.oid,oitem.olicno,oitem.obid,oitem.dflscount,oitem)">
+                          <ion-icon slot="start" name="close"></ion-icon>
+                          Cancel Order
+                        </ion-button>
+
+                      </ion-row>
+                      <div style="padding: 1%;"></div>
+                    </ion-grid>
+                  </div>
+                </ion-card>
+              </ion-slide>
+
+
+
+
+              
+
+           
+
+
+
+
+
+
+
+
+
+
+
+
+
+         
+
+            </ng-container>
+
+
+
+            <ng-container *ngFor="let item of itemm.sdetails;let in = index">
+
+
+
+
+
+
+
+
+
+              <ion-slide>
+                <ion-card class="c" style="border: 2px solid green;
+        border-radius: 25px;">
+                  <div style="margin-left:3% ;margin-right:3% ; margin-top:2% ;">
+                    <ion-grid>
+                      <ion-row class="ion-justify-content-between">
+                        <div>
+                          <ion-label>Variety -
+                          </ion-label>
+                          <ion-label style="color: black;font-family: lato;">
+                            <b> {{item.orderdetails.variety}}</b>
+                          </ion-label>
+
+                        </div>
+
+                        <div>
+                          <ion-label>
+                            Quantity -
+                          </ion-label>
+                          <ion-label style="color: black;font-family: lato;">
+                            <b> {{item.orderdetails.dflscount}}</b>
+                          </ion-label>
+                        </div>
+                      </ion-row>
+                      <div style="padding: 2%;"></div>
+
+                      <ion-row class="ion-justify-content-between">
+                        <div>
+                          <ion-label>
+                            OrdDate -
+                          </ion-label>
+                          <ion-label style="color: black;font-family: lato;">
+                            <b> {{item.orderdetails.orodate}} </b>
+                          </ion-label>
+
+                        </div>
+
+                        <div>
+                          <ion-label>
+                            DispDate -
+                          </ion-label>
+                          <ion-label style="color: black;font-family: lato;">
+                            <b> {{item.orderdetails.orddate}} </b>
+                          </ion-label>
+
+                        </div>
+                      </ion-row>
+
+                      <div style="padding: 2%;"></div>
+
+                      <ion-row class="ion-justify-content-between">
+                        <div>
+                          <ion-label>
+                            Amount -
+                          </ion-label>
+                          <ion-label style="color: black;font-family: lato;">
+                            <b> {{item.amount|currency:"₹"}}</b>
+                          </ion-label>
+
+                        </div>
+                        <div>
+                          <ion-label>
+                            Dis -
+                          </ion-label>
+                          <ion-label style="color: black;font-family: lato;">
+                            <b> {{item.billingdetails.discount}}% </b>
+                          </ion-label>
+                        </div>
+
+                        <div>
+                          <ion-label>
+                            Sub -
+                          </ion-label>
+                          <ion-label style="color: black;font-family: lato;">
+                            <b> {{item.billingdetails.sub| currency:"₹"}} </b>
+                          </ion-label>
+                        </div>
+                      </ion-row>
+                      <div style="padding: 2%;"></div>
+                      <ion-row class="ion-justify-content-center">
+
+                        <ion-button color="primary"
+                          (click)="showorddetails(item,itemm.id);this.updatesdetails=itemm.sdetails;this.updateindex=in">
+                          View Details</ion-button>
+
+                      </ion-row>
+                      <div style="padding: 1%;"></div>
+                    </ion-grid>
+
+
+                  </div>
+                </ion-card>
+              </ion-slide>
+
+
+            </ng-container>
+
+          
+
+
+            <ion-slide *ngIf="itemm.sdetails.length==0" >
+              <ion-card class="cextra" style="border: 2px solid black;
+      border-radius: 25px;">
+                <div style="margin-left:3% ;margin-right:3% ; margin-top:2% ;">
+                  <ion-grid>
+                    <ion-col class="ion-align-self-center">
+                    <ion-row class="ion-justify-content-center">
+                        <ion-label style="color: black;font-size: 20px; padding-top: 10%;">
+                          There are no Dispatched Orders...
+
+                        </ion-label>
+                    </ion-row>
+                  </ion-col>
+                  </ion-grid>
+                </div>                                     
+              </ion-card>
+            </ion-slide>
+
+          </ion-slides>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div *ngIf="!showorder">
+    <ion-grid>
+      <!-- <ion-col > -->
+      <ion-row>
+
+
+        <ion-card class="c">
+          <ion-card-header>
+            <ion-card-title>
+              <ion-skeleton-text animated style="width: 50%" *ngIf="!showdetails"></ion-skeleton-text>
+
+
+              <div *ngIf="showdetails" style="font-size: 25px;">Order Details</div>
+
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row *ngIf="!showdetails">
+                <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+              </ion-row>
+              <ion-row *ngIf="showdetails">
+                <ion-label color="dark" style="font-size: 20px;"><b>Delivered Address</b></ion-label>
+              </ion-row>
+
+
+
+              <ion-row *ngIf="!showdetails">
+                <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+
+
+
+
+              </ion-row>
+              <ion-row *ngIf="showdetails">
+                <ion-label color="dark" style="width: 100%">{{showcontent.orderdetails.fullname}}</ion-label><br>
+                <ion-label color="dark">{{showcontent.orderdetails.address}}</ion-label><br>
+                <ion-label color="dark">{{showcontent.orderdetails.village}}-{{showcontent.orderdetails.pincode}}
+                </ion-label><br>
+                <ion-label color="dark">
+                  {{showcontent.orderdetails.town}}-{{showcontent.orderdetails.district}}-{{showcontent.orderdetails.state}}
+                </ion-label><br>
+              </ion-row>
+
+              <div style="padding-top: 5%;"></div>
+
+
+              <ion-row class="ion-justify-content-between" *ngIf="!showdetails">
+                <div style="width: 90%">
+                  <ion-card-title>
+                    <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                  </ion-card-title>
+                  <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                </div>
+                <ion-card-title style="width: 10%">
+                  <ion-skeleton-text animated></ion-skeleton-text>
+                </ion-card-title>
+
+              </ion-row>
+
+
+
+              <ion-row class="ion-justify-content-between" *ngIf="showdetails">
+                <div>
+                  <ion-card-title>
+                    <div>{{showcontent.orderdetails.variety}}</div>
+                  </ion-card-title>
+                  <ion-label color="dark">Seller-{{showcontent.bname}}</ion-label>
+                </div>
+                <ion-card-title>
+                  {{showcontent.orderdetails.price| currency:"₹"}}
+                </ion-card-title>
+
+              </ion-row>
+
+
+              <ion-row class="ion-justify-content-between" *ngIf="!showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 30%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+              </ion-row>
+              <div style="padding-top: 5%;"></div>
+
+              <ion-row class="ion-justify-content-between" *ngIf="showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;"> <b>{{showcontent.orderdetails.dflscount}}</b>
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b> Quantity </b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;">
+                      <b>{{showcontent.orderdetails.price| currency:"₹"}}</b>
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b>Price</b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;"> <b>
+                        {{showcontent.orderdetails.total| currency:"₹"}}</b>
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"><b> Total </b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+              </ion-row>
+
+              <ion-row class="ion-justify-content-between" *ngIf="!showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+
+              </ion-row>
+
+              <ion-item-divider></ion-item-divider>
+
+
+              <ion-row *ngIf="!showdetails">
+                <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+              </ion-row>
+              <ion-row *ngIf="showdetails">
+                <ion-label color="dark" style="font-size: 20px;"><b>Order Proccesing Dates</b></ion-label>
+              </ion-row>
+
+              <ion-row class="ion-justify-content-between" *ngIf="showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;"> {{showcontent.idate}}
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b>Incubation Date</b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;">{{showcontent.bbdate}}
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b>BlackBoxing Date</b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+
+
+              </ion-row>
+
+
+              <ion-row class="ion-justify-content-between" *ngIf="!showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+
+              </ion-row>
+              <div style="padding-top: 5%;"></div>
+
+              <ion-row class="ion-justify-content-between" *ngIf="showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;"> {{showcontent.fmdate}}
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b> Hatching Date </b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;">{{showcontent.orderdetails.orddate}}
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b>Dispatch Date</b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+
+
+              </ion-row>
+
+
+
+
+              <ion-row class="ion-justify-content-center">
+                <ion-skeleton-text animated style="width: 60%" *ngIf="!showdetails"></ion-skeleton-text>
+
+                <ion-label color="dark" style="font-size: 20px;" *ngIf="showdetails">
+                  <b>Delivered on</b> {{showcontent.orderdetails.orddate}}
+                </ion-label>
+              </ion-row>
+              <ion-item-divider></ion-item-divider>
+
+              <div style="padding-top: 5%;"></div>
+              <ion-row *ngIf="!showdetails">
+                <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+              </ion-row>
+              <ion-row *ngIf="showdetails">
+                <ion-label color="dark" style="font-size: 20px;"><b>Billing Details</b></ion-label>
+              </ion-row>
+
+
+
+
+              <ion-row class="ion-justify-content-between" *ngIf="!showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+
+              </ion-row>
+              <div style="padding-top: 5%;"></div>
+
+              <ion-row class="ion-justify-content-between" *ngIf="showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;"> {{showcontent.billingdetails.discount}}%
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b>Discount(%)</b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;">{{showcontent.billingdetails.sub|currency:"₹"}}
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b>Subsidy</b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+
+
+              </ion-row>
+
+
+
+              <div style="padding-top: 5%;"></div>
+
+              <ion-row class="ion-justify-content-between" *ngIf="!showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+
+              </ion-row>
+              <div style="padding-top: 5%;"></div>
+
+              <ion-row class="ion-justify-content-between" *ngIf="showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;"> {{showcontent.source}}
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b>Source</b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;">{{showcontent.billingdetails.licno}}
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b>Seller(License#)</b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+
+
+              </ion-row>
+
+              <div style="padding-top: 5%;"></div>
+
+              <ion-row class="ion-justify-content-between" *ngIf="!showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+
+              </ion-row>
+              <div style="padding-top: 5%;"></div>
+
+              <ion-row class="ion-justify-content-between" *ngIf="showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;"> {{showcontent.billingdetails.lotno}}
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b>LOT Number</b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;">{{showcontent.hper}}%
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b>Hatching per(%)</b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+
+
+              </ion-row>
+
+            </ion-grid>
+
+
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card class="c">
+
+          <ion-card-header>
+            <ion-card-title>
+              <ion-skeleton-text animated style="width: 50%" *ngIf="!showdetails"></ion-skeleton-text>
+
+
+              <div *ngIf="showdetails" style="font-size: 25px;">Payment Status</div>
+
+            </ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            <ion-grid>
+              <ion-row class="ion-justify-content-between" *ngIf="!showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                  </ion-row>
+                </ion-grid>
+
+
+              </ion-row>
+
+
+              <ion-row class="ion-justify-content-between" *ngIf="showdetails">
+
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;"> {{showcontent.amount|currency:"₹"}}
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b>Amount</b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+                <ion-grid>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 22px;">{{showcontent.amtpaid|currency:"₹"}}
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark"> <b>Paid Amount</b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+
+
+              </ion-row>
+            </ion-grid>
+
+          </ion-card-content>
+
+        </ion-card>
+
+
+        <ion-card class="c" *ngIf="showcontent.orderdetails.cat=='Customer'" >
+
+          <ion-card-header>
+            <ion-card-title>
+              <ion-skeleton-text animated style="width: 50%" *ngIf="!showdetails"></ion-skeleton-text>
+
+
+              <div *ngIf="showdetails" style="font-size: 25px;">Cacoon Status</div>
+
+            </ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+
+            <div *ngIf="!showdetails&&!showmarket">
+
+              <div *ngFor="let itemcs of showcontent.cropstatus">
+                <ion-grid>
+                  <ion-row class="ion-justify-content-between">
+                    <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center" *ngIf="itemcs.status=='Passed'">
+                    <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+
+                  </ion-row>
+
+                  <ion-row class="ion-justify-content-between" *ngIf="itemcs.status=='Running'">
+
+                    <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                    <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+
+
+                  </ion-row>
+
+                </ion-grid>
+
+                <ion-item-divider></ion-item-divider>
+
+
+              </div>
+
+            </div>
+
+            <div *ngIf="showdetails">
+
+              <div *ngFor="let itemcs of showcontent.cropstatus">
+                <ion-grid>
+                  <ion-row class="ion-justify-content-between">
+                    <ion-label color="dark" style="font-size: 16px;"> Stage - <b>{{itemcs.stage}}</b>
+                    </ion-label>
+                    <ion-label color="dark" style="font-size: 16px;" *ngIf="itemcs.status=='Passed'" > Status - <b style="color: green;">{{itemcs.status}}</b> 
+                    </ion-label>
+                    <ion-label color="dark" style="font-size: 16px;" *ngIf="itemcs.status=='Failed'"> Status - <b style="color: red;">{{itemcs.status}}</b>
+                    </ion-label>
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center" *ngIf="itemcs.status=='Passed'||itemcs.status=='Failed'">
+                    <ion-label color="dark" style="font-size: 13px;" > <b>{{itemcs.status}} On {{itemcs.date}}</b>
+                    </ion-label>
+                    
+                  </ion-row>
+                  <ion-row class="ion-justify-content-center" *ngIf="itemcs.status=='Running'">
+
+                    <ion-label color="dark" style="font-size: 15px;" >Duration: <b>{{itemcs.duration}}</b>
+                    </ion-label>
+
+
+                  </ion-row>
+
+                  <ion-row class="ion-justify-content-between" *ngIf="itemcs.status=='Running'">
+
+                    <ion-button color="primary" (click)="passed(updatesdetails,updateindex)" color="success">Passed
+                    </ion-button>
+                    <ion-button color="primary" (click)="failed(updatesdetails,updateindex)" color="danger">Failed
+                    </ion-button>
+
+
+                  </ion-row>
+
+                </ion-grid>
+
+                <ion-item-divider></ion-item-divider>
+
+
+              </div>
+
+            </div>
+
+
+
+
+            <div *ngIf="showcontent.cropstatus.length==7&&showcontent.cropstatus[showcontent.cropstatus.length-1].status=='Passed'">
+
+              <ion-grid>
+                <ion-row class="ion-justify-content-between" *ngIf="!showdetails">
+
+
+                  <ion-grid>
+                    <ion-row class="ion-justify-content-center">
+                      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+
+                    </ion-row>
+                    <ion-row class="ion-justify-content-center">
+                      <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                    </ion-row>
+                    <ion-row class="ion-justify-content-center">
+                      <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                    </ion-row>
+                  </ion-grid>
+
+                  <ion-grid>
+                    <ion-row class="ion-justify-content-center">
+                      <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                    </ion-row>
+                    <ion-row class="ion-justify-content-center">
+                      <ion-skeleton-text animated style="width: 40%"></ion-skeleton-text>
+
+                    </ion-row>
+                  </ion-grid>
+
+
+                </ion-row>
+
+
+
+                <ion-row *ngIf="showdetails" class="ion-justify-content-between" >
+                  <ion-label color="dark" style="font-size: 20px;"> <b>Cacoon Qunatity</b>
+                  </ion-label>
+
+                  <ion-icon style="color :black" src="../../assets/pencil-sharp.svg" name="pencil-sharp" size="large" (click)="addcacoonextra(updatesdetails,updateindex)"></ion-icon>
+                </ion-row>
+
+                <ion-row class="ion-justify-content-between" *ngIf="showdetails">
+
+
+
+                  <ion-grid>
+                    <ion-row class="ion-justify-content-center">
+                      <ion-label color="dark" style="font-size: 22px;"> {{showcontent.cacoon}}
+                      </ion-label>
+                    </ion-row>
+                    <ion-row class="ion-justify-content-center">
+                      <ion-label color="dark"> <b>Cacoon</b>
+                      </ion-label>
+                    </ion-row>
+                  </ion-grid>
+
+                  <ion-grid>
+                    <ion-row class="ion-justify-content-center">
+                      <ion-label color="dark" style="font-size: 22px;">{{showcontent.cacoonsold}}
+                      </ion-label>
+                    </ion-row>
+                    <ion-row class="ion-justify-content-center">
+                      <ion-label color="dark"> <b>Cacoon Sold</b>
+                      </ion-label>
+                    </ion-row>
+
+                   
+
+
+                  </ion-grid>
+
+
+                  
+                 
+
+                </ion-row>
+              </ion-grid>
+              <ion-grid>
+          
+                <ion-row   class="ion-justify-content-center">
+
+                
+
+
+                  <form [formGroup]="form" >
+                    
+            <div (click)="rateit(updatesdetails,updateindex)">
+                    <ngx-star-rating formControlName="rating" [id]="'rating3'"   ></ngx-star-rating>
+                  </div>
+                </form>
+                
+                </ion-row>
+
+              </ion-grid>
+            </div>
+          </ion-card-content>
+        </ion-card>
+
+
+
+
+ 
+
+          <ion-card class="c" *ngIf="showcontent.cropstatus.length==7&&showcontent.cropstatus[showcontent.cropstatus.length-1].status=='Passed'&&showcontent.orderdetails.cat=='Customer'">
+
+            <ion-card-header>
+              <ion-card-title>
+                <ion-skeleton-text animated style="width: 50%" *ngIf="!showdetails"></ion-skeleton-text>
+  
+  
+                <div *ngIf="showdetails" style="font-size: 25px;">Market</div>
+  
+              </ion-card-title>
+            </ion-card-header>
+  
+            <ion-card-content>
+  
+              <div *ngIf="!showdetails&&!showmarket">
+  
+                <div *ngFor="let itemcs of showcontent.market">
+                  <ion-grid>
+                    <ion-row class="ion-justify-content-between">
+                      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+  
+                    </ion-row>
+                    <ion-row class="ion-justify-content-center" *ngIf="itemcs.status=='Passed'">
+                      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+  
+                    </ion-row>
+  
+                    <ion-row class="ion-justify-content-between" *ngIf="itemcs.status=='Running'">
+  
+                      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+                      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+  
+  
+                    </ion-row>
+  
+                  </ion-grid>
+  
+                  <ion-item-divider></ion-item-divider>
+  
+  
+                </div>
+  
+              </div>
+  
+              <div *ngIf="showdetails">
+
+                <ion-grid>
+           
+           
+                  <ion-row  class="ion-justify-content-center">
+          <div class="immi">
+                    <img  src="../../assets/realmarketiconcrop.jpg" alt=""><br>
+                  </div>
+                  </ion-row>
+
+                  <ion-row class="ion-justify-content-center">
+                    <ion-label color="dark" style="font-size: 16px;"> Lot Number - <b>{{showcontent.billingdetails.lotno}}</b>
+                    </ion-label>
+                  
+                  </ion-row>
+
+                  
+
+                </ion-grid>
+  
+                <div *ngFor="let itemmar of showcontent.market">
+                  <ion-grid>
+                    <ion-row class="ion-justify-content-center" >
+                      <ion-label color="dark" style="font-size: 20px;">Name - <b> {{itemmar.marname}}</b>
+                      </ion-label>
+                    </ion-row>
+
+                    <ion-row class="ion-justify-content-between">
+                      <ion-label color="dark" style="font-size: 16px;"> Quantity - <b>{{itemmar.quant}}</b>
+                      </ion-label>
+                      <ion-label color="dark" style="font-size: 16px;"> Price - <b>{{itemmar.price|currency:"₹"}}</b>
+                      </ion-label>
+                      
+                    </ion-row>
+                    
+                    <ion-row class="ion-justify-content-center">
+                      <ion-label color="dark" style="font-size: 16px;"> Selling Date  - <b>{{itemmar.date}}</b>
+                      </ion-label>
+                    </ion-row>
+  
+               
+                  </ion-grid>
+  
+                  <ion-item-divider></ion-item-divider>
+                
+                </div>
+                
+                <ion-grid >
+                  <ion-row class="ion-justify-content-center" >
+  
+                    <ion-button color="primary"  *ngIf="!getmarinfo&&showcontent.cacoon!=showcontent.cacoonsold" 
+                     (click)="this.getmarinfo=true;" 
+                     color="success">Add Market
+                    </ion-button>
+                 
+
+
+                  </ion-row>
+
+                </ion-grid>
+
+                <ion-grid *ngIf="getmarinfo" >
+
+                  <ion-row>
+                    <ion-label color="dark" style="font-size: 20px;"><b>Adding Market</b>
+                    </ion-label>
+                  </ion-row>
+                </ion-grid>
+
+
+                <ion-grid *ngIf="getmarinfo" >
+
+                  <ion-row>
+                    <form [formGroup]="logform" class="c">
+                    <ion-item >
+
+                      <ion-label>Markets </ion-label>
+                      <ion-select  placeholder="Select Market" formControlName="marname">
+                     
+                        <ion-select-option  *ngFor="let mar of markets; let mi = index" [value]="mar.value">{{mar.value}}</ion-select-option>
+                  
+                      </ion-select>
+                    </ion-item>
+
+                    
+                      <ion-item>
+                        <ion-label position="floating">Enter Selling Quantity</ion-label>
+            
+                        <ion-input  type="tel" formControlName="quant" clearInput ></ion-input>
+                      </ion-item>
+                     
+                      <ion-item>
+                        <ion-label position="floating">Enter Selling Price </ion-label>
+                        <ion-input  type="tel" formControlName="price"  clearInput></ion-input>
+                      </ion-item>
+                    
+                    </form>
+
+
+                  </ion-row>
+
+                  <div style="padding-top: 5%;"></div>
+
+                  <ion-row class="ion-justify-content-between"  >
+
+                    <ion-button color="primary" (click)="this.getmarinfo=false;this.logform.reset()" color="light">Cancel
+                    </ion-button>
+  
+                    <ion-button color="primary" (click)="addmarket(updatesdetails,updateindex)" color="primary" [disabled]="this.logform.invalid">Add Market
+                    </ion-button>
+                 
+
+
+                  </ion-row>
+
+                </ion-grid>
+
+
+                    
+                              
+                <div style="padding-bottom: 10%;">
+
+                </div>
+  
+              </div>
+
+            </ion-card-content>
+          </ion-card>
+
+
+      
+
+
+
+
+
+
+
+
+      </ion-row>
+      <!-- </ion-col> -->
+    </ion-grid>
+
+  </div>
+  
+
+</ion-content>
